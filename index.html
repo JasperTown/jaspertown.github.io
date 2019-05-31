@@ -214,54 +214,8 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       
-      <h1 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h1><h3 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h3><ul>
-<li>流就是字节序列的抽象概念，能被连续读取数据的数据源和能被连续写入数据的接收端就是流，流机制是Java及C++中的一个重要机制，通过流我们可以自由地控制文件、内存、IO设备等数据的流向。而IO流就是用于处理设备上的数据，如：硬盘、内存、键盘录入等。IO流根据处理类型的不同可分为字节流和字符流，根据流向的不同可分为输入流和输出流。<h4 id="二-、字节流和字符流的区别"><a href="#二-、字节流和字符流的区别" class="headerlink" title="二 、字节流和字符流的区别"></a>二 、字节流和字符流的区别</h4></li>
-<li>字符流，因为文件编码的不同，就有了对字符进行高效操作的字符流对象，它的原理就是基于字节流读取字节时去查了指定的码表。它和字节流的区别有两点：1.在读取数据的时候，字节流读到一个字节就返回一个字节，字符流使用了字节流读到一个或多个字节（一个中文对应的字节数是两个，在UTF-8码表中是3个字节）时，先去查指定的编码表，再将查到的字符<br>返回；</li>
-<li>字节流可以处理所有类型的数据，如jpg、avi、mp3、wav等等，而字符流只能处理字符数据。所以可以根据处理的文件不同考虑使用字节流还是字符流，如果是纯文本数据可以优先考虑字符流，否则使用字节流。<h3 id="三、IO继承体系"><a href="#三、IO继承体系" class="headerlink" title="三、IO继承体系"></a>三、IO继承体系</h3><img src="./IO继承体系.png" alt="IO继承体系"><h4 id="IO流主要可以分为节点流和处理流两大类"><a href="#IO流主要可以分为节点流和处理流两大类" class="headerlink" title="IO流主要可以分为节点流和处理流两大类"></a>IO流主要可以分为节点流和处理流两大类</h4><h5 id="1-节点流类型"><a href="#1-节点流类型" class="headerlink" title="1.节点流类型"></a>1.节点流类型</h5>该类型可以从或者向一个特定的地点或者节点读写数据。主要类型如下：<br><img src="./节点流.png" alt="IO节点流"><h4 id="2-处理流类型"><a href="#2-处理流类型" class="headerlink" title="2.处理流类型"></a>2.处理流类型</h4>该类型是对一个已存在的流的连接和封装，通过所封装的流的功能调用实现数据读写，处理流的构造方法总是要带一个其他流对象作为参数，一个流对象进过其他流的多次包装，叫做流的链接。主要可以分为以下几种：</li>
-</ul>
-<p>(1) 缓冲流（BufferedInPutStream/BufferedOutPutStream和BufferedWriter/BufferedReader）他可以提高对流的操作效率。<br> 写入缓冲区对象：<br> BufferedWriter bufw=new BufferedWriter(new FileWriter(“buf.txt”));<br>读取缓冲区对象：<br> BufferedReader bufr=new BufferedReader(new FileReader(“buf.txt”));<br><code>注意：</code>该类型的流有一个特有的方法：readLine()；一次读一行，到行标记时，将行标记之前的字符数据作为字符串返回，当读到末尾时，返回null，其原理还是与缓冲区关联的流对象的read方法，只不过每一次读取到一个字符，先不进行具体操作，先进行临时储存，当读取到回车标记时，将临时容器中储存的数据一次性返回。</p>
-<p>(2) 转换流（InputStreamReader/OutputStreamWriter）</p>
-<ul>
-<li><p>该类型时字节流和字符流之间的桥梁，该流对象中可以对读取到的字节数据进行指定编码的编码转换。</p>
-<h5 id="构造函数主要有："><a href="#构造函数主要有：" class="headerlink" title="构造函数主要有："></a>构造函数主要有：</h5><figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">InputStreamReader(InputStream); <span class="comment">//通过构造函数初始化，使用的是本系统默认的编码表GBK。  </span></span><br><span class="line">InputStreamWriter(InputStream,String charSet);<span class="comment">//通过该构造函数初始化，可以指定编码表。  </span></span><br><span class="line">OutputStreamWriter(OutputStream); <span class="comment">//通过该构造函数初始化，使用的是本系统默认的编码表GBK。  </span></span><br><span class="line">OutputStreamwriter(OutputStream,String charSet); <span class="comment">//通过该构造函数初始化，可以指定编码表。</span></span><br></pre></td></tr></table></figure>
-<p><code>注意：</code>在使用FileReader操作文本数据时，该对象使用的时默认的编码表，即</p>
-<p>FileReader fr=new FileReader(“a.txt”);<br>与   InputStreamReader isr=new InputStreamReader(new FileInputStream(“a.txt”));   的意义相同。如果要使用指定表编码表时，必须使用转换流，即如果a.txt中的文件中的字符数据是通过utf-8的形式编码，那么在读取时，就必须指定编码表，那么转换流时必须的。即：</p>
-<figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStreamReader isr=<span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"a.txt"</span>),utf-<span class="number">8</span>);</span><br></pre></td></tr></table></figure>
-<p>(3) 数据流（<code>DataInputStream/DataOutputStream</code>）</p>
-<ul>
-<li>该数据流可以方便地对一些基本类型数据进行直接的存储和读取，不需要再进一步进行转换，通常只要操作基本数据类型的数据，就需要通过DataStream进行包装。<br>构造方法：        <figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DataInputStreamReader（InputStream）；  </span><br><span class="line">DataInputStreamWriter（OutputStream）；</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="方法举例："><a href="#方法举例：" class="headerlink" title="方法举例："></a>方法举例：</h5><figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一次读取四个字节，并将其转成int值           </span></span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">readInt</span><span class="params">()</span>；</span></span><br><span class="line"><span class="function"><span class="comment">//一次写入四个字节，注意和write(int)不同，write(int)只将该整数的最低一个8位写入，</span></span></span><br><span class="line"><span class="function">剩余三个8为丢失  </span></span><br><span class="line"><span class="function">  <span class="title">writeInt</span><span class="params">(<span class="keyword">int</span>)</span>；</span></span><br><span class="line"><span class="function">  hort <span class="title">readShort</span><span class="params">()</span></span>;  </span><br><span class="line">  writeShort(<span class="keyword">short</span>);</span><br><span class="line"><span class="comment">//按照utf-8修改版读取字符，注意，它只能读writeUTF()写入的字符数据。    </span></span><br><span class="line"> <span class="function">String <span class="title">readUTF</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//按照utf-8修改版将字符数据进行存储，只能通过readUTF读取。</span></span><br><span class="line"> writeUTF(String);</span><br></pre></td></tr></table></figure>
-<p><code>注意：</code>在使用数据流读/存数据的时候，需要有一定的顺序，即某个类型的数据先写入就必须先读出，服从先进先出的原则。</p>
-</li>
-</ul>
-<p>(4) 打印流（PrintStream/PrintWriter）</p>
-<ul>
-<li><code>PrintStream</code>是一个字节打印流，System.out对应的类型就是PrintStream，它的构造函数可以接受三种数据类型的值：字符串路径、File对象 、OutputStream；</li>
-<li><p><code>PrintStream</code>是一个字符打印流，它的构造函数可以接受四种类型的值：字符串路径、File对象、<br>OutputStream；</p>
-<p>(5) 对象流（ObjectInputStream/ObjectOutputStream）</p>
-<p>该类型的流可以把类作为一个整体进行存取，主要方法有：</p>
-<figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//该方法抛出异常：ClassNotFountException</span></span><br><span class="line"> <span class="function">Object <span class="title">readObject</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//被写入的对象必须实现一个接口：Serializable，否则就会抛出：NotSerializableException</span></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(Object)</span></span>;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="4-IO流简单示例-FileInputStream"><a href="#4-IO流简单示例-FileInputStream" class="headerlink" title="4.IO流简单示例(FileInputStream)"></a>4.IO流简单示例(<code>FileInputStream</code>)</h3><figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FileInputStreamTest</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        FileInputStream fis = <span class="keyword">null</span>;</span><br><span class="line">        FileOutputStream fos = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            fis =<span class="keyword">new</span> FileInputStream(<span class="string">"D:/study/iotest/src.txt"</span>);</span><br><span class="line">            fos =<span class="keyword">new</span> FileOutputStream(<span class="string">"D:/study/iotest/dest.txt"</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">int</span> x;</span><br><span class="line">            <span class="keyword">while</span> ((x = fis.read()) != -<span class="number">1</span>) &#123;</span><br><span class="line">                fos.write(x);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (fis != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    fis.close();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (fos != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    fos.close();</span><br><span class="line">              &#125;</span><br><span class="line">	 &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="commons-io"><a href="#commons-io" class="headerlink" title="commons-io"></a>commons-io</h1><p>commons-io 是一款处理 io 流的工具，封装了很多处理 io 流和文件的方法，可以大大简化我们处理 io 流和操作文件的代码。从 common-io 的官方使用文档可以看出，它主要分为工具类、尾端类、行迭代器、文件过滤器、文件比较器和扩展流。</p>
-<h3 id="一、工具类"><a href="#一、工具类" class="headerlink" title="一、工具类"></a>一、工具类</h3><h4 id="工具类包括-FileUtils、IOUtils、FilenameUtils和-FileSystemUtils，前三者的方法并没有多大的区别，只是操作的对象不同，故名思议：FileUtils-主要操作-File-类，IOUtils-主要操作-IO-流，FilenameUtils-则是操作文件名，FileSystemUtils-包含了一些-JDK-没有提供的用于访问文件系统的实用方法。当前，只有一个用于读取硬盘空余空间的方法可用。"><a href="#工具类包括-FileUtils、IOUtils、FilenameUtils和-FileSystemUtils，前三者的方法并没有多大的区别，只是操作的对象不同，故名思议：FileUtils-主要操作-File-类，IOUtils-主要操作-IO-流，FilenameUtils-则是操作文件名，FileSystemUtils-包含了一些-JDK-没有提供的用于访问文件系统的实用方法。当前，只有一个用于读取硬盘空余空间的方法可用。" class="headerlink" title="工具类包括 FileUtils、IOUtils、FilenameUtils和 FileSystemUtils，前三者的方法并没有多大的区别，只是操作的对象不同，故名思议：FileUtils 主要操作 File 类，IOUtils 主要操作 IO 流，FilenameUtils 则是操作文件名，FileSystemUtils 包含了一些 JDK 没有提供的用于访问文件系统的实用方法。当前，只有一个用于读取硬盘空余空间的方法可用。"></a>工具类包括 <code>FileUtils、IOUtils、FilenameUtils</code>和 <code>FileSystemUtils</code>，前三者的方法并没有多大的区别，只是操作的对象不同，故名思议：FileUtils 主要操作 File 类，IOUtils 主要操作 IO 流，FilenameUtils 则是操作文件名，FileSystemUtils 包含了一些 JDK 没有提供的用于访问文件系统的实用方法。当前，只有一个用于读取硬盘空余空间的方法可用。</h4><h3 id="二、尾端类"><a href="#二、尾端类" class="headerlink" title="二、尾端类"></a>二、尾端类</h3><h4 id="不同的计算机体系结构使用不同约定的字节排序。在所谓的“低位优先”体系结构中（如-Intel），低位字节处于内存中最低位置，而其后的字节，则处于更高的位置。在“高位优先”的体系结构中（如Motorola），这种情况恰恰相反。"><a href="#不同的计算机体系结构使用不同约定的字节排序。在所谓的“低位优先”体系结构中（如-Intel），低位字节处于内存中最低位置，而其后的字节，则处于更高的位置。在“高位优先”的体系结构中（如Motorola），这种情况恰恰相反。" class="headerlink" title="不同的计算机体系结构使用不同约定的字节排序。在所谓的“低位优先”体系结构中（如 Intel），低位字节处于内存中最低位置，而其后的字节，则处于更高的位置。在“高位优先”的体系结构中（如Motorola），这种情况恰恰相反。"></a>不同的计算机体系结构使用不同约定的字节排序。在所谓的“低位优先”体系结构中（如 <code>Intel</code>），低位字节处于内存中最低位置，而其后的字节，则处于更高的位置。在“高位优先”的体系结构中（如<code>Motorola</code>），这种情况恰恰相反。</h4><ul>
-<li>这个类库上有两个相关类：<br><code>EndianUtils</code>包含用于交换 java 原对象和流之间的字节序列。<br><code>SwappedDataInputStream</code>类是 DataInput 接口的一个实例。使用它，可以读取非本地的字节序列。<h3 id="三、行迭代器"><a href="#三、行迭代器" class="headerlink" title="三、行迭代器"></a>三、行迭代器</h3><h4 id="org-apache-commons-io-LineIterator类提供了一个灵活的方式与基于行的文件交互。可以直接创建一个实例，或者使用-FileUtils-或-IOUtils-的工厂方法来创建，-实例如下："><a href="#org-apache-commons-io-LineIterator类提供了一个灵活的方式与基于行的文件交互。可以直接创建一个实例，或者使用-FileUtils-或-IOUtils-的工厂方法来创建，-实例如下：" class="headerlink" title="org.apache.commons.io.LineIterator类提供了一个灵活的方式与基于行的文件交互。可以直接创建一个实例，或者使用 FileUtils 或 IOUtils 的工厂方法来创建， 实例如下："></a><code>org.apache.commons.io.LineIterator</code>类提供了一个灵活的方式与基于行的文件交互。可以直接创建一个实例，或者使用 FileUtils 或 IOUtils 的工厂方法来创建， 实例如下：</h4><figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testIterator</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">    File file = <span class="keyword">new</span> File(<span class="string">"a.txt"</span>);</span><br><span class="line">    LineIterator li = FileUtils.lineIterator(file);</span><br><span class="line">    <span class="keyword">while</span>(li.hasNext())&#123;</span><br><span class="line">    System.out.println(li.nextLine());</span><br><span class="line">	&#125;</span><br><span class="line">	LineIterator.closeQuietly(li);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="四、文件过滤器"><a href="#四、文件过滤器" class="headerlink" title="四、文件过滤器"></a>四、文件过滤器</h3><h4 id="org-apache-commons-io-filefilter-包定义了一个合并了-java-io-FileFilter-以及-java-io-FilenameFilter-的接口-IOFileFilter-。除此之外，这个包还提供了一系列直接可用的-IOFileFilter-的实现类，可以通过他们合并其它的文件过滤器。比如，这些文件过滤器可以在列出文件时使用或者在使用文件对话框时使用。"><a href="#org-apache-commons-io-filefilter-包定义了一个合并了-java-io-FileFilter-以及-java-io-FilenameFilter-的接口-IOFileFilter-。除此之外，这个包还提供了一系列直接可用的-IOFileFilter-的实现类，可以通过他们合并其它的文件过滤器。比如，这些文件过滤器可以在列出文件时使用或者在使用文件对话框时使用。" class="headerlink" title="org.apache.commons.io.filefilter 包定义了一个合并了 java.io.FileFilter 以及 java.io.FilenameFilter 的接口 (IOFileFilter)。除此之外，这个包还提供了一系列直接可用的 IOFileFilter 的实现类，可以通过他们合并其它的文件过滤器。比如，这些文件过滤器可以在列出文件时使用或者在使用文件对话框时使用。"></a><code>org.apache.commons.io.filefilter</code> 包定义了一个合并了 <code>java.io.FileFilter</code> 以及 <code>java.io.FilenameFilter</code> 的接口 (<code>IOFileFilte</code>r)。除此之外，这个包还提供了一系列直接可用的 <code>IOFileFilter</code> 的实现类，可以通过他们合并其它的文件过滤器。比如，这些文件过滤器可以在列出文件时使用或者在使用文件对话框时使用。</h4><figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 空内容文件过滤器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testEmptyFileFilter</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">	File dir = <span class="keyword">new</span> File(<span class="string">"a.txt"</span>);</span><br><span class="line">	String[] files = dir.list(EmptyFileFilter.NOT_EMPTY);</span><br><span class="line">	<span class="keyword">for</span> (String file : files) &#123;</span><br><span class="line">		System.out.println(file);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 文件名称后缀过滤器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">**<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSuffixFileFilter</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">	File dir = <span class="keyword">new</span> File(basePath);</span><br><span class="line">	String[] files = dir.list(<span class="keyword">new</span> SuffixFileFilter(<span class="string">"a.txt"</span>));</span><br><span class="line">	<span class="keyword">for</span> (String file : files) &#123;</span><br><span class="line">	System.out.println(file);</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="五、文件比较器"><a href="#五、文件比较器" class="headerlink" title="五、文件比较器"></a>五、文件比较器</h3><h4 id="org-apache-commons-io-comparator包为-java-io-File-提供了一些-java-util-Comparator-接口的实现。例如，可以使用这些比较器对文件集合或数组进行排序。-实例如下："><a href="#org-apache-commons-io-comparator包为-java-io-File-提供了一些-java-util-Comparator-接口的实现。例如，可以使用这些比较器对文件集合或数组进行排序。-实例如下：" class="headerlink" title="org.apache.commons.io.comparator包为 java.io.File 提供了一些 java.util.Comparator 接口的实现。例如，可以使用这些比较器对文件集合或数组进行排序。 实例如下："></a><code>org.apache.commons.io.comparator</code>包为 java.io.File 提供了一些 java.util.Comparator 接口的实现。例如，可以使用这些比较器对文件集合或数组进行排序。 实例如下：</h4><figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 文件名称比较器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testNameFileComparator</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		File f1 = <span class="keyword">new</span> File(basePath + <span class="string">"a.txt"</span>);</span><br><span class="line">		File f2 = <span class="keyword">new</span> File(basePath + <span class="string">"c.txt"</span>);</span><br><span class="line">		<span class="keyword">int</span> result = NameFileComparator.NAME_COMPARATOR.compare(f1, f2);</span><br><span class="line">		System.out.println(result);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 文件路径比较器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPathFileComparator</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		File f1 = <span class="keyword">new</span> File(basePath + <span class="string">"a.txt"</span>);</span><br><span class="line">		File f2 = <span class="keyword">new</span> File(basePath + <span class="string">"c.txt"</span>);</span><br><span class="line">		<span class="keyword">int</span> result = PathFileComparator.PATH_COMPARATOR.compare(f1, f2);</span><br><span class="line">		System.out.println(result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 组合比较器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCompositeFileComparator</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		File dir = <span class="keyword">new</span> File(basePath);</span><br><span class="line">		File [] files = dir.listFiles();</span><br><span class="line">		<span class="keyword">for</span> (File file : files) &#123;</span><br><span class="line">			System.out.println(file.getName());</span><br><span class="line">		&#125;</span><br><span class="line">		CompositeFileComparator cfc = <span class="keyword">new</span> CompositeFileComparator(</span><br><span class="line">		DirectoryFileComparator.DIRECTORY_COMPARATOR,</span><br><span class="line">		NameFileComparator.NAME_COMPARATOR);</span><br><span class="line">		cfc.sort(files);</span><br><span class="line">		System.out.println(<span class="string">"**_**after sort*****"</span>);</span><br><span class="line">		<span class="keyword">for</span> (File file : files) &#123;</span><br><span class="line">			System.out.println(file.getName());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="六、扩展流"><a href="#六、扩展流" class="headerlink" title="六、扩展流"></a>六、扩展流</h3><h4 id="org-apache-commons-io-input-和-org-apache-commons-io-output包中包含的针对数据流的各种各样的的实现。包括："><a href="#org-apache-commons-io-input-和-org-apache-commons-io-output包中包含的针对数据流的各种各样的的实现。包括：" class="headerlink" title="org.apache.commons.io.input 和 org.apache.commons.io.output包中包含的针对数据流的各种各样的的实现。包括："></a><code>org.apache.commons.io.input</code> 和 <code>org.apache.commons.io.output</code>包中包含的针对数据流的各种各样的的实现。包括：</h4><ul>
-<li>空输出流－默默吸收发送给它的所有数据</li>
-<li>T 型输出流－全用两个输出流替换一个进行发送</li>
-<li>字节数组输出流－这是一个更快版本的 JDK 类</li>
-<li>计数流－计算通过的字节数</li>
-<li>代理流－使用正确的方法委拖</li>
-<li>可锁写入－使用上锁文件提供同步写入</li>
-</ul>
-
+      
+      IO一、概念 流就是字节序列的抽象概念，能被连续读取数据的数据源和能被连续写入数据的接收端就是流，流机制是Java及C++中的一个重要机制，通过流我们可以自由地控制文件、内存、IO设备等数据的流向。而IO流就是用于处理设备上的数据，如：硬盘、内存、键盘录入等。IO流根据处理类型的不同可分为字节流和字符流，根据流向的不同可分为输入流和输出流。二 、字节流和字符流的区别 字符流，因为文件编码的不同，就
       
     </main>
     <footer class="post-footer">
@@ -311,87 +265,8 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       
-      <p>Spring 4.x Task 和 Schedule</p>
-<p>在很多业务场景中，系统都需要用到任务调度系统。例如定期地清理Redis 缓存，周期性地检索某一条件并更新系统的资源等。在现代的应用系统中，快速地响应用户的请求，是用户体验最主要的因素<br>之一。因此在Web 系统中异步地执行任务，也会在很多场景中经常涉及到。本文对任务调度和异步执行的Java 实现进行了总结，主要讲述一下内容：</p>
-<p>Java 对异步执行和任务调度的支持<br>Spring 4.X 的异步执行和任务调度实现<br>Java 对异步执行和任务调度的支持</p>
-<p>异步执行和任务调度底层的语言支撑都是Java 的多线程技术。线程是系统进行独立运行和调度的基本单位。拥有了多线程，系统就拥有了同时处理多项任务的能力。</p>
-<p>Java 实现异步调用</p>
-<p>在Java 中要实现多线程有实现Runnable 接口和扩展Thread 类两种方式。只要将需要异步执行的任务放在run() 方法中，在主线程中启动要执行任务的子线程就可以实现任务的异步执行。如果需要实现基于<br>时间点触发的任务调度，就需要在子线程中循环的检查系统当前的时间跟触发条件是否一致，然后触发任务的执行。该内容属于Java 多线程的基础知识，此处略过不讲。</p>
-<p>Java Timer 和 TimeTask 实现任务调度</p>
-<p>为了便于开发者快速地实现任务调度，Java JDK 对任务调度的功能进行了封装，实现了Timer 和TimerTask 两个工具类。</p>
-<p>TimerTask 类</p>
-<p>由上图，我们可以看出TimeTask 抽象类在实现Runnable 接口的基础上增加了任务cancel() 和任务scheduledExecuttionTime() 两个方法。</p>
-<p>Timer 类</p>
-<p>上图为调度类Timer 的实现。从Timer类的源码，可以看到其采用TaskQueue 来实现对多个TimeTask 的管理。TimerThread 集成自Thread 类，其mainLoop() 用来对任务进行调度。而Timer 类提供了四种重载<br>的schedule() 方法和重载了两种sheduleAtFixedRate() 方法来实现几种基本的任务调度类型。下面的代码是采用Timer 实现的定时系统时间打印程序。</p>
-<p>public class PrintTimeTask extends TimerTask {<br>    @Override<br>        public void run() {<br>            System.out.println(new Date().toString());<br>        }</p>
-<pre><code>public static void main(String[] args) {
-    Timer timer = new Timer(&quot;hello&quot;);
-    timer.schedule(new PrintTimeTask(), 1000L, 2000L);
-}
-</code></pre><p>}</p>
-<p>Spring 4.x 中的异步执行和任务调度</p>
-<p>Spring 4.x 中的异步执行</p>
-<p>Spring 作为一站式框架，为开发者提供了异步执行和任务调度的抽象接口TaskExecutor 和TaskScheduler。Spring 对这些接口的实现类支持线程池(Thread Pool) 和代理。<br>Spring 提供了对JDK 中Timer和开源的流行任务调度框架Quartz的支持。Spring 通过将关联的Schedule 转化为FactoryBean 来实现。通过Spring 调度框架，开发者可以快速地通过MethodInvokingFactoryBean<br>来实现将POJO 类的方法转化为任务。</p>
-<p>Spring TaskExecutor</p>
-<p>TaskExecutor 接口扩展自java.util.concurrent.Executor 接口。TaskExecutor 被创建来为其他组件提供线程池调用的抽象。</p>
-<p>ThreadPoolTaskExecutor 是TaskExecutor 的最主要实现类之一。该类的核心继承关系如下图所示。<br>ThreadPooltaskexecutor 类</p>
-<p>ThreadPoolTaskExecutor 接口扩展了重多的接口，让其具备了更多的能力。要实现异步需要标注@Async 注解：</p>
-<p>AsyncTaskExecutor 增加了返回结果为Future 的submit() 方法，该方法的参数为Callable 接口。相比Runnable 接口，多了将执行结果返回的功能。<br>AsyncListenableTaskExecutor 接口允许返回拥有回调功能的ListenableFuture 接口，这样在结果执行完毕是，能够直接回调处理。<br>public class ListenableTask {<br>    @Async<br>    public ListenableFuture<integer> compute(int n) {<br>        int sum = 0;<br>        for (int i = 0; i &lt; n; i++) {<br>            sum += i;<br>        }<br>        return new AsyncResult&lt;&gt;(sum);<br>    }</integer></p>
-<pre><code>static class CallBackImpl implements 
-    ListenableFutureCallback&lt;Integer&gt; {
-    @Override
-    public void onFailure(Throwable ex) {
-        System.out.println(ex.getMessage());
-    }
-
-    @Override
-    public void onSuccess(Integer result) {
-        System.out.println(result);
-    }
-}
-
-public static void main(String[] args) {
-    ListenableTask listenableTask = new ListenableTask();
-    ListenableFuture&lt;Integer&gt; listenableFuture = 
-        listenableTask.compute(10);
-    listenableFuture.addCallback(new CallBackImpl());
-}
-</code></pre><p>}</p>
-<p>ThreadFactory 定义了创建线程的工厂方法，可以扩展该方法实现对Thread 的改造。<br>基于Java Config</p>
-<p>基于注解 当采用基于Java Config 注解配置时，只需要在主配置添加@EnableAsync 注解，Spring 会自动的创建基于ThreadPoolTaskExecutor 实例注入到上下文中。<br>@Configuration<br>@EnableAsync<br>public class AppConfig {<br>}<br>1<br>2<br>3<br>4<br>基于AsyncConfigurer接口自定义 开发者可以自定义Executor 的类型，并且注册异常处理器。<br>@Configuration<br>public class TaskConfig implements AsyncConfigurer {<br>    @Override<br>    public Executor getAsyncExecutor() {<br>        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();<br>        executor.setMaxPoolSize(100);<br>        executor.setCorePoolSize(10);<br>        return executor;<br>    }</p>
-<pre><code>@Override
-public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-    return new AsyncUncaughtExceptionHandler() {
-        @Override
-        public void handleUncaughtException(Throwable ex, 
-                                            Method method, Object... params) {
-            System.out.println(ex.getMessage());
-        }
-    };
-}
-</code></pre><p>}</p>
-<p>基于XML Config</p>
-<p>基于传统XML的配置 基于XML 的形式，采用传统的Java Bean的形式配置ThreadPoolTaskExecutor。然后采用自动注入(autowire, resource,name)的可以直接在Spring Component 中注入Executor。<br>以编程的形式实现异步任务。</p>
-<p><bean id="taskExecutor" class="org.springframework.scheduling.concurrent.
-    ThreadPoolTaskExecutor"><br>    <property name="corePoolSize" value="5"><br>    <property name="maxPoolSize" value="10"><br>    <property name="queueCapacity" value="25"><br></property></property></property></bean><br>1<br>2<br>3<br>4<br>5<br>6<br>基于task 命名空间的配置 Spring 为任务的执行提供了便利的task 命名空间。当采用基于XML 配置时Spring 会自动地为开发者创建Executor。同时可以在annotation-driven 标签上注册<br>实现了AsyncUncaughtExceptionHandler 接口的异常处理器。<br><!-- config exception handler  --></p>
-<p><bean id="taskAsyncExceptionHandler" class="org.zzy.spring4.application.schedulie.TaskAsyncExceptionHandler"><br>&lt;task:annotation-driven exception-handler=”taskAsyncExceptionHandler” scheduler=”scheduler” executor=”executor”/&gt;<br>1<br>2<br>3<br>异步执行的异常处理</bean></p>
-<p>除了上文提到的两种异常处理方式，Spring 还提供了基于SimpleApplicationEventMulticaster 类的异常处理方式。</p>
-<p>@Bean<br>public SimpleApplicationEventMulticaster eventMulticaster(TaskExecutor taskExecutor) {<br>    SimpleApplicationEventMulticaster eventMulticaster = new SimpleApplicationEventMulticaster();<br>    eventMulticaster.setTaskExecutor(taskExecutor);<br>    eventMulticaster.setErrorHandler(new ErrorHandler() {<br>        @Override<br>        public void handleError(Throwable t) {<br>            System.out.println(t.getMessage());<br>        }<br>    });<br>    return eventMulticaster;<br>}</p>
-<p>Spring 4.x 中任务调度实现</p>
-<p>Spring 的任务调度主要基于TaskScheduler 接口。ThreadPoolTaskScheduler 是Spring 任务调度的核心实现类。该类提供了大量的重载方法进行任务调度。Trigger 定义了任务被执行的触发条件。<br>Spring 提供了基于Corn 表达式的CornTrigger实现。TaskScheduler 如下图所示。<br>ThreadPoolTaskExecutor 类</p>
-<p>实现TaskScheduler 接口的ThreadPoolTaskExecutor 继承关系。<br>ThreadPoolTaskExecutor 类</p>
-<p>基于Java Config</p>
-<p>基于注解的配置 当采用基于Java Config 注解配置时，只需要在主配置添加@EnableScheduling 注解，Spring 会自动的创建基于ThreadPoolTaskExecutor 实例注入到上下文中。<br>@Configuration<br>@EnableScheduling<br>public class AppConfig {<br>}<br>1<br>2<br>3<br>4<br>基于SchedulingConfigurer接口自定义<br>@Configuration<br>public class ScheduleConfig implements SchedulingConfigurer {<br>    @Override<br>    public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {<br>        taskRegistrar.setTaskScheduler(new ThreadPoolTaskScheduler());<br>        taskRegistrar.getScheduler().schedule(new Runnable() {<br>            @Override<br>            public void run() {<br>                System.out.println(“hello”);<br>            }<br>        }, new CronTrigger(“0 15 9-17 <em> </em> MON-FRI”));<br>    }<br>}</p>
-<p>基于XML Config</p>
-<p>&lt;task:annotation-driven scheduler=”myScheduler”/&gt;<br>&lt;task:scheduler id=”myScheduler” pool-size=”10”/&gt;<br>1<br>2<br>@Scheduled 注解的使用</p>
-<p>当某个Bean 由Spring 管理生命周期时，就可以方便的使用@Shcheduled 注解将该Bean 的方法准换为基于任务调度的策略。</p>
-<p>@Scheduled(initialDelay=1000, fixedRate=5000)<br>public void doSomething() {<br>    // something that should execute periodically<br>}</p>
-<p>@Scheduled(cron=”<em>/5 </em> <em> </em> * MON-FRI”)<br>public void doSomething() {<br>    // something that should execute on weekdays only<br>}<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>task 命名空间中的task:scheduled-tasks</p>
-<p>该元素能够实现快速地将一个普通Bean 的方法转换为Scheduled 任务的途径。具体如下：</p>
-<p>&lt;task:scheduled-tasks scheduler=”myScheduler”&gt;<br>    &lt;task:scheduled ref=”beanA” method=”methodA” fixed-delay=”5000” initial-delay=”1000”/&gt;<br>    &lt;task:scheduled ref=”beanB” method=”methodB” fixed-rate=”5000”/&gt;<br>    &lt;task:scheduled ref=”beanC” method=”methodC” cron=”<em>/5 </em> <em> </em> * MON-FRI”/&gt;<br>&lt;/task:scheduled-tasks&gt;<br>&lt;task:scheduler id=”myScheduler” pool-size=”10”/&gt;</p>
-<p>总结</p>
-<p>本文着重介绍了JDK 为任务调度提供的基础类Timer。并在此基础上详细介绍了Spring 4.x 的异步执行和任务调度的底层接口设计。并针对常用的模式进行了讲解，并附带了源代码。<br>第三方开源的Quartz 实现了更为强大的任务调度系统，Spring 也对集成Quartz 提供了转换。之后会择机再详细的介绍Quartz 的应用和设计原理。同时，Servlet 3.x 为Web 的异步<br>调用提供了AsyncContext，对基于Web 的异步调用提供了原生的支持，后续的文章也会对此有相应的介绍。</p>
-
+      
+      Spring 4.x Task 和 Schedule 在很多业务场景中，系统都需要用到任务调度系统。例如定期地清理Redis 缓存，周期性地检索某一条件并更新系统的资源等。在现代的应用系统中，快速地响应用户的请求，是用户体验最主要的因素之一。因此在Web 系统中异步地执行任务，也会在很多场景中经常涉及到。本文对任务调度和异步执行的Java 实现进行了总结，主要讲述一下内容： Java 对异步执行和
       
     </main>
     <footer class="post-footer">
@@ -441,70 +316,8 @@ public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
     </header>
     <main class="post-main" itemprop="articleBody">
       
-      <h1 id="Spring-Resource"><a href="#Spring-Resource" class="headerlink" title="Spring Resource"></a>Spring Resource</h1><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>​    在日常程序开发中，处理外部资源是很繁琐的事情，我们可能需要处理URL资源、File资源资源、<code>ClassPath</code>相关资源、服务器相关资源（JBoss AS 5.x上的VFS资源）等等很多资源。因此处理这些资源需要使用不同的接口，这就增加了我们系统的复杂性；而且处理这些资源步骤都是类似的（打开资源、读取资源、关闭资源），因此如果能抽象出一个统一的接口来对这些底层资源进行统一访问，是不是很方便，而且使我们系统更加简洁，都是对不同的底层资源使用同一个接口进行访问。</p>
-<p>​       Spring 提供一个Resource接口来统一这些底层资源一致的访问，而且提供了一些便利的接口，从而能提供我们的生产力。</p>
-<h3 id="Resource-接口"><a href="#Resource-接口" class="headerlink" title="Resource 接口"></a>Resource 接口</h3><ul>
-<li><p>Spring的Resource接口代表底层外部资源，提供了对底层外部资源的一致性访问接口。</p>
-<figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InputStreamSource</span> </span>&#123;  </span><br><span class="line">    <span class="function">InputStream <span class="title">getInputStream</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>InputStreamSource接口解析</p>
-<ul>
-<li><strong>getInputStream</strong>：每次调用都将返回一个新鲜的资源对应的<code>java.io. InputStream</code>字节流，调用者在使用完毕后必须关闭该资源。</li>
-<li>Resource接口继承<code>InputStreamSource</code>接口，并提供一些便利方法：<ul>
-<li><strong>exists</strong>：返回当前Resource代表的底层资源是否存在，true表示存在。</li>
-<li><strong>isReadable</strong>：返回当前Resource代表的底层资源是否可读，true表示可读。</li>
-<li><strong>isOpen</strong>：返回当前Resource代表的底层资源是否已经打开，如果返回true，则只能被读取一次然后关闭以避免资源泄露；常见的Resource实现一般返回false。</li>
-<li><strong>getURL</strong>：如果当前Resource代表的底层资源能由java.util.URL代表，则返回该URL，否则抛出IOException。</li>
-<li><strong>getURI</strong>：如果当前Resource代表的底层资源能由java.util.URI代表，则返回该URI，否则抛出IOException。</li>
-<li><strong>getFile</strong>：如果当前Resource代表的底层资源能由java.io.File代表，则返回该File，否则抛出IOException。</li>
-<li><strong>contentLength</strong>：返回当前Resource代表的底层文件资源的长度，一般是值代表的文件资源的长度。</li>
-<li><strong>lastModified</strong>：返回当前Resource代表的底层资源的最后修改时间。</li>
-<li><strong>createRelative</strong>：用于创建相对于当前Resource代表的底层资源的资源，比如当前Resource代表文件资源“d:/test/”则createRelative（“test.txt”）将返回表文件资源“d:/test/test.txt”Resource资源。</li>
-<li><strong>getFilename</strong>：返回当前Resource代表的底层文件资源的文件路径，比如File资源“file://d:/test.txt”将返回“d:/test.txt”，而URL资源<a href="http://www.javass.cn将返回“”，因为只返回文件路径。" target="_blank" rel="noopener">http://www.javass.cn将返回“”，因为只返回文件路径。</a></li>
-<li><strong>getDescription</strong>：返回当前Resource代表的底层资源的描述符，通常就是资源的全路径（实际文件名或实际URL地址）。    </li>
-</ul>
-</li>
-<li>Resource接口提供了足够的抽象，足够满足我们日常使用。而且提供了很多内置Resource实现：<code>ByteArrayResource、InputStreamResource 、FileSystemResource 、UrlResource 、ClassPathResource、ServletContextResource、VfsResource</code>等。</li>
-</ul>
-<figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Resource</span> <span class="keyword">extends</span> <span class="title">InputStreamSource</span> </span>&#123;  </span><br><span class="line">       <span class="function"><span class="keyword">boolean</span> <span class="title">exists</span><span class="params">()</span></span>;  </span><br><span class="line">       <span class="function"><span class="keyword">boolean</span> <span class="title">isReadable</span><span class="params">()</span></span>;  </span><br><span class="line">       <span class="function"><span class="keyword">boolean</span> <span class="title">isOpen</span><span class="params">()</span></span>;  </span><br><span class="line">       <span class="function">URL <span class="title">getURL</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;  </span><br><span class="line">       <span class="function">URI <span class="title">getURI</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;  </span><br><span class="line">       <span class="function">File <span class="title">getFile</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;  </span><br><span class="line">       <span class="function"><span class="keyword">long</span> <span class="title">contentLength</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;  </span><br><span class="line">       <span class="function"><span class="keyword">long</span> <span class="title">lastModified</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;  </span><br><span class="line">       <span class="function">Resource <span class="title">createRelative</span><span class="params">(String relativePath)</span> <span class="keyword">throws</span> IOException</span>;  </span><br><span class="line">       <span class="function">String <span class="title">getFilename</span><span class="params">()</span></span>;  </span><br><span class="line">       <span class="function">String <span class="title">getDescription</span><span class="params">()</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Resource 和 @Autowired的不同</p>
-<ul>
-<li><p>@Autowired与@Resource都可以用来装配bean. 都可以写在字段上,或写在setter方法上。</p>
-</li>
-<li><p>@Autowired默认按类型装配（这个注解是属业spring的），默认情况下必须要求依赖对象必须存在，如果要允许null值，可以设置它的required属性为false，如：<br>@Autowired(required=false) ，如果我们想使用名称装配可以结合@Qualifier注解进行使用，如下：</p>
-<figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span>() <span class="meta">@Qualifier</span>(<span class="string">"baseDao"</span>)    </span><br><span class="line"><span class="keyword">private</span> BaseDao baseDao;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>@Resource 是JDK1.6支持的注解<strong>，</strong>默认按照名称进行装配，名称可以通过name属性进行指定，如果没有指定name属性，当注解写在字段上时，默认取字段名，按照名称查找，如果注解写在setter方法上默认取属性名进行装配。当找不到与名称匹配的bean时才按照类型进行装配。但是需要注意的是，如果name属性一旦指定，就只会按照名称进行装配。只不过注解处理器我们使用的是Spring提供的，是一样的，无所谓解耦不解耦的说法，两个在便利程度上是等同的。</p>
-</li>
-<li><p>他们的主要区别就是@Autowired是默认按照类型装配的 @Resource默认是按照名称装配的<br>byName 通过参数名 自动装配，如果一个bean的name 和另外一个bean的 property 相同，就自动装配。<br>byType 通过参数的数据类型自动自动装配，如果一个bean的数据类型和另外一个bean的property属性的数据类型兼容，就自动装配</p>
-<figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Resource</span>(name=<span class="string">"baseDao"</span>)    </span><br><span class="line"><span class="keyword">private</span> BaseDao baseDao;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>我们可以通过 @Autowired 或 @Resource 在 Bean 类中使用自动注入功能，但是 Bean 还是在 XML 文件中通过 <bean> 进行定义 —— 也就是说，在 XML 配置文件中定义 Bean，通过@Autowired 或 @Resource 为 Bean 的成员变量、方法入参或构造函数入参提供自动注入的功能。<br>比如下面的beans.xml。</bean></p>
-<figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Boss</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Car car;</span><br><span class="line">  <span class="keyword">private</span> Office office;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 省略 get/setter</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"car:"</span> + car + <span class="string">"\n"</span> + <span class="string">"office:"</span> + office;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="hljs highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans </span></span></span><br><span class="line"><span class="tag"><span class="string">                           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">                           http://www.springframework.org/schema/context </span></span></span><br><span class="line"><span class="tag"><span class="string">                           http://www.springframework.org/schema/context/spring-context-2.5.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span> </span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"boss"</span> <span class="attr">class</span>=<span class="string">"com.wuxinliulei.Boss"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"office"</span> <span class="attr">class</span>=<span class="string">"com.wuxinliulei.Office"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"officeNo"</span> <span class="attr">value</span>=<span class="string">"001"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car"</span> <span class="attr">class</span>=<span class="string">"com.wuxinliulei.Car"</span> <span class="attr">scope</span>=<span class="string">"singleton"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"brand"</span> <span class="attr">value</span>=<span class="string">" 红旗 CA72"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"price"</span> <span class="attr">value</span>=<span class="string">"2000"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>​</p>
-</li>
-<li><p>定义了三个bean对象，但是没有了我们书序的ref指向的内容<br>比如</p>
-<figure class="hljs highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans </span></span></span><br><span class="line"><span class="tag"><span class="string"> http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"boss"</span> <span class="attr">class</span>=<span class="string">"com.wuxinliulei.Boss"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"car"</span> <span class="attr">ref</span>=<span class="string">"car"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"office"</span> <span class="attr">ref</span>=<span class="string">"office"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"office"</span> <span class="attr">class</span>=<span class="string">"com.wuxinliulei.Office"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"officeNo"</span> <span class="attr">value</span>=<span class="string">"002"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car"</span> <span class="attr">class</span>=<span class="string">"com.wuxinliulei.Car"</span> <span class="attr">scope</span>=<span class="string">"singleton"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"brand"</span> <span class="attr">value</span>=<span class="string">" 红旗 CA72"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"price"</span> <span class="attr">value</span>=<span class="string">"2000"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>​</p>
-</li>
-<li><p>spring2.5提供了基于注解（Annotation-based）的配置，我们可以通过注解的方式来完成注入依赖。在Java代码中可以使用 @Resource或者@Autowired注解方式来经行注入。虽然@Resource和@Autowired都可以来完成注入依赖，但它们之间是有区 别的。首先来看一下：</p>
-<ul>
-<li>@Resource默认是按照名称来装配注入的，只有当找不到与名称匹配的bean才会按照类型来装配注入</li>
-<li>@Autowired默认是按照类型装配注入的，如果想按照名称来转配注入，则需要结合@Qualifier一起使用</li>
-<li>@Resource注解是由JDK提供，而@Autowired是由Spring提供</li>
-<li>@Resource和@Autowired都可以书写标注在字段或者该字段的setter方法之上。  </li>
-</ul>
-</li>
-<li><p>使用注解的方式，我们需要修改spring配置文件的头信息如下:</p>
-<figure class="hljs highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">http:</span>//<span class="attr">www.springframework.org</span>/<span class="attr">schema</span>/<span class="attr">beans</span>"</span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:context</span>=<span class="string">"Index of /schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"Index of /schema/beans </span></span></span><br><span class="line"><span class="tag"><span class="string">http://www.springframework.org/schema/beans/spring-beans-2.5.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">Index of /schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">http://www.springframework.org/schema/context/spring-context-2.5.xsd"</span>&gt;</span></span><br><span class="line">               </span><br><span class="line"><span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<p>​</p>
-</li>
-</ul>
-
+      
+      Spring Resource前言​ 在日常程序开发中，处理外部资源是很繁琐的事情，我们可能需要处理URL资源、File资源资源、ClassPath相关资源、服务器相关资源（JBoss AS 5.x上的VFS资源）等等很多资源。因此处理这些资源需要使用不同的接口，这就增加了我们系统的复杂性；而且处理这些资源步骤都是类似的（打开资源、读取资源、关闭资源），因此如果能抽象出一个统一的接口来对这些底层资
       
     </main>
     <footer class="post-footer">
@@ -546,26 +359,8 @@ public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
     </header>
     <main class="post-main" itemprop="articleBody">
       
-      <h1 id="基础研发能力提升总结"><a href="#基础研发能力提升总结" class="headerlink" title="基础研发能力提升总结"></a>基础研发能力提升总结</h1><p>下周就是元旦节了，转眼2017年也要过去了。不知道各位小伙伴2017年的计划完成了多少，得到了什么，又失去了什么。<br>今年研发中心大力推行<code>基础研发能力提升</code>，刚开始推进的时候，其实我内心是拒绝的。学习是自己的事，居然还得自上而下“逼”大家来学，学习这件事应该是自下而上，自发组织才是。我不能理解居然有不愿意学习的研发人员。<br><strong>不重视基础研发能力，而想做出精品软件，可乎？其本乱而末治者，否矣。</strong><br>吴军老师在他的得到专栏中提到“做事情的三条边”。<br><img src="images/做好事情的三条边.jpg" alt="做好事情的三条边"><br><strong>下面一条线是基础，也就是基线。</strong>上面一条线就是极限，中间就是从基线到极限的通道。我们做的基础研发能力提升，就是不断提高大家的基线。基础研发能力提升也没有尽头，也许今天我们的极限就是明天的基线。知行合一，止于至善。</p>
-<h2 id="基础研发能力提升的成果"><a href="#基础研发能力提升的成果" class="headerlink" title="基础研发能力提升的成果"></a>基础研发能力提升的成果</h2><p>在过去的一年，有理想、有追求的程序员、业务人员都已经参与到基础研发能力提升中了。在MVD中，有着开源精神的IT人们，贡献了以下这些宝贵的资料：</p>
-<ul>
-<li>标准规范文档 - <strong>76份</strong></li>
-<li>代码整洁规范 - <strong>10份</strong></li>
-<li>好代码坏代码总结 - <strong>50份</strong></li>
-<li>commons &amp; java基础类库培训文档 - <strong>71份</strong>  </li>
-<li>需求和业务文档 - <strong>3000余份</strong> </li>
-<li>生产环境疑难问题总结 - <strong>25份</strong></li>
-</ul>
-<p>在这里尤其感谢陈家银，郭锋，王冰，黄美媛等人的总结，每一份文档都能感受到作者做为一个IT人的精神：务真、求实、分享。</p>
-<h2 id="老码农们的建议"><a href="#老码农们的建议" class="headerlink" title="老码农们的建议"></a>老码农们的建议</h2><p>往者不可谏，来者犹可追。以下是几个老码农给新码农的一些建议，希望对你们有所用。</p>
-<h3 id="增强知识的深度"><a href="#增强知识的深度" class="headerlink" title="增强知识的深度"></a>增强知识的深度</h3><p>在学习时，要做到刨根问底，不仅知其然，也知其所以然。不要花太多精力放在记忆性的内容上。如果不在实战中运用用，记住了也很快就会忘。</p>
-<h3 id="增强知识的广度"><a href="#增强知识的广度" class="headerlink" title="增强知识的广度"></a>增强知识的广度</h3><p>IT行业从没如此繁荣，也会继续在这可见的一二十年中继续繁荣。新的技术层不出穷，出来一个热门的新技术，你还没来得学，这个技术就已经被淘汰了。对于新技术的趋势，要有所了解，持续关注。</p>
-<h3 id="不要埋头写代码"><a href="#不要埋头写代码" class="headerlink" title="不要埋头写代码"></a>不要埋头写代码</h3><p>写代码只是手段，不是目的。不要以为编码就是王道，什么产品规划、需求业务，市场推广，那都不叫事。 咱们扪心自问，加那么多班，熬那么多夜，最后我们有多少拿的出手的成果，有多少是在重复造轮子。无论是做产品还是做开源，只有用的人觉得好了，这个代码才是有意义的，而要做好这些，程序员既要能埋头写代码，又要能对需求、业务，市场动态有所了解。</p>
-<h3 id="知行合一，止于至善"><a href="#知行合一，止于至善" class="headerlink" title="知行合一，止于至善"></a>知行合一，止于至善</h3><p>Linus Torvalds说<code>Talk is cheap. Show me the code</code>。有些同学会hello world就敢说精通，听过名字就敢说熟练使用。每一次你说精通，可能都表示你看到的天只有井底的那一小片，所以你会说我已经看到整片天了。知不弃行，行不离思，慎思之，笃行之。知和行是相辅相成，不断升华。</p>
-<h3 id="多做笔记，勤总结"><a href="#多做笔记，勤总结" class="headerlink" title="多做笔记，勤总结"></a>多做笔记，勤总结</h3><p>多做笔记，要学的东西太多，学不过来，也记不过来。把重要的内容分类做好笔记，用到时方便找到。<br>子曰：学而不思则罔 思而不学则殆。多做总结，一是可以让知识学得更扎实，二是让自己不要总是犯同样的错误。</p>
-<h3 id="努力努力努力"><a href="#努力努力努力" class="headerlink" title="努力努力努力"></a>努力努力努力</h3><p>让自己成为一个更好的自己。新来的学妹都喜欢努力的男生。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>希望2018年不再需要自上而下来“逼”大家学，每个项目组都会自发的制定学习计划，也有人自发组织兴趣小组。<br>新的一年，共勉。</p>
-
+      
+      基础研发能力提升总结下周就是元旦节了，转眼2017年也要过去了。不知道各位小伙伴2017年的计划完成了多少，得到了什么，又失去了什么。今年研发中心大力推行基础研发能力提升，刚开始推进的时候，其实我内心是拒绝的。学习是自己的事，居然还得自上而下“逼”大家来学，学习这件事应该是自下而上，自发组织才是。我不能理解居然有不愿意学习的研发人员。不重视基础研发能力，而想做出精品软件，可乎？其本乱而末治者，否矣
       
     </main>
     <footer class="post-footer">
@@ -609,149 +404,8 @@ public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
     </header>
     <main class="post-main" itemprop="articleBody">
       
-      <h1 id="代码复查方法总结"><a href="#代码复查方法总结" class="headerlink" title="代码复查方法总结"></a>代码复查方法总结</h1><h2 id="一、人工复查忽略工具可以复查的问题"><a href="#一、人工复查忽略工具可以复查的问题" class="headerlink" title="一、人工复查忽略工具可以复查的问题"></a>一、人工复查忽略工具可以复查的问题</h2><p>代码复查需要带着目标来查，人工复查不要过分关注可以采用自动化工具可以复查的部分，例如通过findbugs和checkstyle可以扫描出来的问题（当然复查人或者研发经理需要关注和推动findbugs问题和checkstyle问题的持续改进）。其中工具可以复查的问题总结如下：</p>
-<blockquote>
-<ul>
-<li>Dead store to local variable 本地变量存储了闲置不用的对象</li>
-<li>Load of known null value 可能会出现空指针异常</li>
-<li>Exception is caught when Exception is not thrown 捕获了异常但是try里并没有抛出异常</li>
-<li>Method ignores exceptional return value 没有对方法的异常返回值进行检查</li>
-<li>Comparison of String objects using == or !=</li>
-<li>Method names should start with a lower case letter</li>
-<li>Non-transient non-serializable instance field in serializable class</li>
-<li>诸多格式问题</li>
-<li><a href="http://blog.csdn.net/aya19880214/article/details/42551903" target="_blank" rel="noopener">more</a></li>
-</ul>
-</blockquote>
-<h2 id="二、重点关注典型问题"><a href="#二、重点关注典型问题" class="headerlink" title="二、重点关注典型问题"></a>二、重点关注典型问题</h2><p>典型问题是基于公司业务场景和类型总结出来的容易出现的代码问题，复查的时候可以有针对性的查找这方面问题</p>
-<blockquote>
-<ul>
-<li><ol>
-<li>Artery项目中，使用列表的行脚本、控件的onfilter脚本、控件的onshow脚本时，编写查询或更新数据库的脚本，使得每刷新一个相关页面，产生大量SQL，从而导致性能问题</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>在循环中（for、wihle），存在查询或更新数据库的脚本，将导致产生大量SQL的问题</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>在循环中（for、wihle），存在查询或更新数据库的脚本，且没有对垃圾数据进行处理，导致无限循环或一个跨度较大的循环，将导致产生大量SQL的问题</li>
-</ol>
-</li>
-<li><ol start="4">
-<li>在一次业务处理中，反复从数据库装载同一对象，将导致产生重复大量SQL的问题</li>
-</ol>
-</li>
-<li><ol start="5">
-<li>SQL脚本操作一批数据，是通过in来实现的，没有预估到in的个数量，导致拼接的SQL很长</li>
-</ol>
-</li>
-<li><ol start="6">
-<li>文件处理，没有考虑到大文件，一次性申请大量的内存进行文件处理，导致内存溢出</li>
-</ol>
-</li>
-<li><ol start="7">
-<li>SQL查询中，不能使用select * 进行查询</li>
-</ol>
-</li>
-<li><ol start="8">
-<li>SQL查询时，条件语句中带or的话，很容易造成全表扫描。最好不要出现这样的sql，可以使用in、union、uion all 代替</li>
-</ol>
-</li>
-<li><ol start="9">
-<li>异常处理中，捕获异常后，没有使用日志框架记录日志的。</li>
-</ol>
-</li>
-<li><ol start="10">
-<li>sql查询数据量的时候，使用select查询明细，然后再通过Collection.getSize()获取数据量，会导致查询效率地下。要使用select count的方式</li>
-</ol>
-</li>
-<li><ol start="11">
-<li>接口返回批量数据的时候，必须做分页控制。避免一次返回上万条数据，效率低而且容易导致JVM内存溢出</li>
-</ol>
-</li>
-</ul>
-</blockquote>
-<h2 id="三、跟踪并总结常见问题"><a href="#三、跟踪并总结常见问题" class="headerlink" title="三、跟踪并总结常见问题"></a>三、跟踪并总结常见问题</h2><h3 id="集合使用问题"><a href="#集合使用问题" class="headerlink" title="集合使用问题"></a>集合使用问题</h3><blockquote>
-<ul>
-<li>1.List的遍历，代码中要使用迭代器(foreach)而不是index</li>
-<li>2.List集合选择，如果能预知集合大小，在初始化集合的时候应该设置集合大小，避免ArrayList动态扩容。如果无法预知集合大小，建议采用LinkedList</li>
-<li>3.LinkedList禁止使用XXX.get(i)</li>
-<li>4.Map遍历禁止使用keySet遍历，在循环体中用XXXMap.get(key)获取value，要使用entrySet进行遍历</li>
-</ul>
-</blockquote>
-<h3 id="线程安全问题"><a href="#线程安全问题" class="headerlink" title="线程安全问题"></a>线程安全问题</h3><blockquote>
-<ul>
-<li><ol>
-<li>关注spring bean中定义属性变量，关注Utils类中的静态变量的实例化伙计</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>关注缓存类的init，reload，get方法间的并发可能性</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>重点关注程序中出现new Thread，Executors的地方对创建线程，或者线程池的使用</li>
-</ol>
-</li>
-</ul>
-</blockquote>
-<h3 id="redis使用"><a href="#redis使用" class="headerlink" title="redis使用"></a>redis使用</h3><blockquote>
-<ul>
-<li><ol>
-<li>关注每次访问redis都重新创建和关闭连接，需要使用jedis连接池</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>关注程序是否一次从redis上下载大量数据</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>关注在for循环中操作redis</li>
-</ol>
-</li>
-</ul>
-</blockquote>
-<h3 id="日志记录"><a href="#日志记录" class="headerlink" title="日志记录"></a>日志记录</h3><blockquote>
-<ul>
-<li><ol>
-<li>关注日志记录中是否合理使用了error、warn、info、debug等日志级别</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>关注日志的输出是否可以支撑后续问题排查和生成环境调试需求，需要输出的信息是否完整输出</li>
-</ol>
-</li>
-</ul>
-</blockquote>
-<h3 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h3><blockquote>
-<ul>
-<li><ol>
-<li>关注正常、异常情况下流是否能正常关闭</li>
-</ol>
-</li>
-</ul>
-</blockquote>
-<p>### </p>
-<h2 id="四、类设计复查"><a href="#四、类设计复查" class="headerlink" title="四、类设计复查"></a>四、类设计复查</h2><blockquote>
-<ul>
-<li>关注类的实现是否符合单一职责原则，重点关注超过500行代码的实现类</li>
-<li>关注代码的依赖是否需要遵循依赖倒置原则（根据业务需求是否会频繁变化作为判断依据）</li>
-<li>关注代码的时候是否符合迪米特法则，重点复查多个类质检是否有A依赖B，同时B也依赖A的情况</li>
-<li>关注接口或类方法中是否返回了List或者Map这样的数据（一个类可以依赖另一个类去实现一个业务逻辑，但是要避免依赖另一个类的数据结构）</li>
-</ul>
-</blockquote>
-<h2 id="五、公司规范复查"><a href="#五、公司规范复查" class="headerlink" title="五、公司规范复查"></a>五、公司规范复查</h2><p>公司的技术规范规定了很多设计和开发方面的约束，有时候架构师或者设计人员对规范中已经规定了的部分在设计的时候可能不再赘述，代码复查的时候也要关注这部分规范的执行情况</p>
-<blockquote>
-<ul>
-<li>1.增量设计（《数据增量设计说明书.docx》）实现，表结构中设计的增量字段在编码的时候是否考虑更新这些字段的值</li>
-<li>2.接口规范（《Q3-DEV-04-02-接口文档模板.doc》）的实现，代码复查的时候关注实现的接口是否按照改文档定义的接口结构组装数据，是否按照文档中规定的状态代码返回。</li>
-</ul>
-</blockquote>
-<h2 id="六、工具、框架复用类复查"><a href="#六、工具、框架复用类复查" class="headerlink" title="六、工具、框架复用类复查"></a>六、工具、框架复用类复查</h2><p>代码复查的时候要关注代码中是否可以复用某些类库或公司的组件实现，避免重复劳动。即使已经实现，也应该通过代码复查的方式告诉对应编码人员有工具可以复用；重点关注commons-lang、commons-io和ArteryXXXUtils以及commons-thunisoft包中的工具类的复用。</p>
-<h2 id="七、业务逻辑复查"><a href="#七、业务逻辑复查" class="headerlink" title="七、业务逻辑复查"></a>七、业务逻辑复查</h2><p>没有彩蛋，对于核心模块，需要先熟悉业务逻辑，再根据业务逻辑走查代码，判断代码实现逻辑是否和预期一致。</p>
-<h2 id="八、安全问题复查"><a href="#八、安全问题复查" class="headerlink" title="八、安全问题复查"></a>八、安全问题复查</h2><p>如果是互联网或者和别的公司的对接项目，还需要对接口、系统页面的安全性进行复查。</p>
-
+      
+      代码复查方法总结一、人工复查忽略工具可以复查的问题代码复查需要带着目标来查，人工复查不要过分关注可以采用自动化工具可以复查的部分，例如通过findbugs和checkstyle可以扫描出来的问题（当然复查人或者研发经理需要关注和推动findbugs问题和checkstyle问题的持续改进）。其中工具可以复查的问题总结如下： Dead store to local variable 本地变量存储了闲
       
     </main>
     <footer class="post-footer">
