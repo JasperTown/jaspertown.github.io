@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    
+    
+    <meta name="keywords" content="Life, ARIA, Hexo">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="JasperTown的博客" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "search.xml";
+      if (searchPath.length === 0) {
+        searchPath = "search.xml";
+      }
+      var path = "/" + searchPath;
+      searchFunc(path, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var cb = null;
+      var els = $(".post figure.highlight");
+      if (els.length) {
+        // Enabled Hexo highlight line number.
+        $(els).each(function (i, e) {
+          $(e).before("<button class=\"copy button\">复制</button>");
+        });
+        cb = new ClipboardJS("button.copy", {
+          "target": function (trigger) {
+              // Get target element by DOM API.
+              // nextElementSibling is figure,highlight.
+              // And following is the sequence of Hexo's internal
+              // highlight layout with line number.
+              return trigger.nextElementSibling.firstChild.firstChild.firstChild.lastChild.firstChild.firstChild;
+          }
+        });
+      } else {
+        // Disabled Hexo highlight line number.
+        els = $(".post pre code");
+        $(els).each(function (i, e) {
+          // Add button before pre, not code.
+          $(e).parent().before("<button class=\"copy button\">复制</button>");
+        });
+        cb = new ClipboardJS("button.copy", {
+          "target": function (trigger) {
+              // Get target element by DOM API.
+              // nextElementSibling is figure,highlight.
+              // And following is the sequence of Hexo's internal
+              // highlight layout without line number.
+              return trigger.nextElementSibling.firstChild;
+          }
+        });
+      }
+      cb.on("success", function (e) {
+        e.clearSelection();
+        var trigger = e.trigger;
+        // Change button text as a user tip.
+        trigger.innerHTML = "已复制";
+        $(trigger).addClass("copied");
+        // Change button text back;
+        setTimeout(function () {
+          trigger.innerHTML = "复制";
+          $(trigger).removeClass("copied");
+        }, 1500);
+      });
+    });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>Git Flow 工作模式 | JasperTown的博客</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">JasperTown的博客</a></h1>
+        <h2 class="subtitle"></h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo2.png" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/GitFlow工作模式/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+       <meta itemprop="name" content="JasperTown">
+       <meta itemprop="description" content>
+       <meta itemprop="image" content="/images/avatar2.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+       <meta itemprop="name" content="JasperTown的博客">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">Git Flow 工作模式</h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-06-01T02:35:49+08:00">2019-06-01 02:35:49</time></span>
+        </span>
+        
+        
+        
+        <span class="post-meta-divider divider">|</span>
+        
+        <span class="post-categories">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git学习/" itemprop="url" rel="index"><span itemprop="name">Git学习</span></a></span>
+        </span>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <h1 id="Git-Flow-工作模式"><a href="#Git-Flow-工作模式" class="headerlink" title="Git Flow 工作模式"></a>Git Flow 工作模式</h1><p>以下为开发团队在落地敏捷开发过程中, 使用 <code>GitFlow</code> 工作模式, 总结的一些点.<br>由于我们也是在尝试探索, 一些地方可能还不太完善, 如发现不对的地方, 请在评论区指出或发起 <code>PR</code>.</p>
+<p>发起任何 <code>Merge Request</code> (或称 <code>Pull Request</code>) 之前, 请参阅本文档作为核对表; 这将为每个人节省时间！</p>
+<h2 id="了解基础知识"><a href="#了解基础知识" class="headerlink" title="了解基础知识"></a>了解基础知识</h2><p>不确定 <em>Merge Request</em> 是什么，或者如何提交 <em>Merge Request</em>?  看看 <strong>GitHub</strong> 的优秀文档：首先 <a href="https://help.github.com/articles/about-pull-requests/" target="_blank" rel="noopener">Using Pull Requests</a></p>
+<h2 id="设置本地开发环境"><a href="#设置本地开发环境" class="headerlink" title="设置本地开发环境"></a>设置本地开发环境</h2><ol>
+<li><p><code>git clone --recursive git@gitlab.thunisoft.com:Team_dzjz/FY_PRD_DZJZ_PRO.git parent</code></p>
+</li>
+<li><p><code>cd parent</code></p>
+</li>
+<li><p><code>git config user.name &#39;Your Name&#39;</code></p>
+</li>
+<li><p><code>git config user.email yourName@thunisoft.com</code></p>
+</li>
+<li><p><code>git config branch.autosetuprebase always</code> </p>
+<blockquote>
+<p>对于新建的分支都会设定 <code>rebase=true</code> 了.<br>已经创建好的分支还是需要手动配置 <code>git config branch.分支名.rebase true</code>.</p>
+</blockquote>
+</li>
+<li><p><code>git flow init</code></p>
+<blockquote>
+<p>初始化你的本地 <code>Git Flow</code> 环境.<br>你必须回答几个关于分支的命名约定的问题. 建议使用默认值.<br>相关说明: <a href="http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html" target="_blank" rel="noopener">http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html</a></p>
+</blockquote>
+</li>
+</ol>
+<h2 id="保持本地代码同步"><a href="#保持本地代码同步" class="headerlink" title="保持本地代码同步"></a>保持本地代码同步</h2><p>!&gt; 请每天 <strong>至少执行一次</strong> 以下操作:</p>
+<ul>
+<li><p>在本地工作目录中, 您可以使用 <code>git fetch --all</code> 将所有远端的分支内容同步到本地.</p>
+</li>
+<li><p>如果在您工作时 <code>upstream/develop</code> 发生了更改，您可以再次同步: </p>
+<ul>
+<li>切换到主开发分支: <code>git checkout develop</code></li>
+<li>更新代码: <code>git pull</code> 或 <code>git pull upstream master</code></li>
+<li>切回工作分支: <code>git checkout feature/v4.2-xxx</code></li>
+<li>重新定位主题分支, 以最小化它与您最近同步的主分支之间的距离(变基、rebase): <code>git rebease develop</code></li>
+</ul>
+<blockquote>
+<p>或者也可以这么干: <code>git fetch origin &amp;&amp; git pull --rebase origin develop &amp;&amp; git rebase develop</code>, 避免来回切分支.<br>有关更多详细信息, 请参阅: <a href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA</a></p>
+</blockquote>
+</li>
+<li><p><strong>警告</strong> 在执行 <code>rebase</code> 操作后, <strong>必须</strong> 使用 <code>git push --force</code> 或 <code>git push --force-with-lease</code> 进行推送.</p>
+</li>
+<li><strong>注意</strong> 通常建议不要使用重写历史记录 <code>git push --force</code>, 而应该使用 <code>git push --force-with-lease</code>.</li>
+<li><strong>提示</strong> 必要时, 可以使用其他分支替代 <code>develop</code>, 如: 在 <code>release</code> 阶段, 个别分支 <em>应该</em> <code>rebase release/xx</code> 而不是 <code>rebase develop</code>.</li>
+</ul>
+<h2 id="保持线性提交历史记录"><a href="#保持线性提交历史记录" class="headerlink" title="保持线性提交历史记录"></a>保持线性提交历史记录</h2><p>合并到主分支时, 项目始终使用快进合并. 如上所述, 在发出拉取请求时, 请确保您的提交历史记录是线性的.</p>
+<p>在命令行, 您可以使用一下命令检查: </p>
+<figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --graph --pretty=oneline</span><br></pre></td></tr></table></figure>
+<p>由于这样子命令比较长, 我们建议创建一个全局别名, 例如 <code>git logg</code>:</p>
+<figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.logg <span class="string">'log --graph --pretty=oneline'</span></span><br></pre></td></tr></table></figure>
+<p>此命令将提供以下输出, 在这种情况下显示一个很好的线性历史记录:</p>
+<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">* c129a02e6c752b49bacd4a445092a44f66c2a1e9 INT-2721增加JDBC延迟器测试的计时器</span><br><span class="line">* 14e556ce23d49229c420632cef608630b1d82e7d INT-2620修复调试日志</span><br><span class="line">* 6140aa7b2cfb6ae309c55a157e94b44e5d0bea4f INT-3037完成后修复JDBC MS丢弃</span><br><span class="line">* 077f2b24ea871a3937c513e08241d1c6cb9c9179将Spring社交Twitter更新至1.0.5</span><br><span class="line">* 6d4f2b46d859c903881a561c35aa28df68f8faf3 INT-3053在&lt;reply-listener /&gt;上允许任务执行者</span><br><span class="line">* 56f9581b85a8a40bbcf2461ffc0753212669a68d将Spring社交Twitter版本更新至1.0.4</span><br></pre></td></tr></table></figure>
+<p>如果你看到相交的线条, 这通常意味着你没有 <code>rebase</code> 最新主分支到你的分支. 如上说述, <strong>请</strong> 在发起合并请求之前 <code>rebase</code> 最新主分支到你的分支.</p>
+<h2 id="遵循分支命名规范"><a href="#遵循分支命名规范" class="headerlink" title="遵循分支命名规范"></a>遵循分支命名规范</h2><p><strong>必须严格按照 <code>git flow</code> 的分支命名</strong></p>
+<ul>
+<li><code>master</code>, <code>develop</code> 这是工程初始化就已有或应有的分支, 若不存在, 请创建.</li>
+<li><code>feature/根据功能尽量进行有意义的命名</code> 功能分支, 卷宗的开发一般都会带上当前 <code>在开发版本的版本号</code>, e.g. <code>feature/v4.2.1-fix-xxx</code>.</li>
+<li><code>release/**</code> 用于稳定测试的分支, 从 develop 打出, 不在此分支上合并需求, 只改测试bug.</li>
+<li><code>hotfix/**</code> 修改线上问题的分支.</li>
+<li><code>bugfix/**</code> 开发过程非线上问题修改的分支.</li>
+</ul>
+<h2 id="遵循代码风格"><a href="#遵循代码风格" class="headerlink" title="遵循代码风格"></a>遵循代码风格</h2><p>请遵循：</p>
+<ul>
+<li><a href="http://artifacts.dzjz.pro/files/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E8%A7%84%E7%BA%A6.pdf" target="_blank" rel="noopener">阿里云代码规约</a></li>
+<li><a href="/#/Google%20Java%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97">Google Java编程风格指南</a></li>
+</ul>
+<h2 id="使用-since-标签"><a href="#使用-since-标签" class="headerlink" title="使用 @since 标签"></a>使用 <code>@since</code> 标签</h2><p><code>@since</code> 为新添加的公共 API 类型和方法使用标记, 例如:</p>
+<figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ......</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> First Last</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 3.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span> ......</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用-author-标签"><a href="#使用-author-标签" class="headerlink" title="使用 @author 标签"></a>使用 <code>@author</code> 标签</h2><p><code>@author</code> 当您更改任何类时，请使用带有您真实姓名的标签.</p>
+<figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ......</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> First Last</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h2 id="挤压提交-Squash-commits"><a href="#挤压提交-Squash-commits" class="headerlink" title="挤压提交(Squash commits)"></a>挤压提交(Squash commits)</h2><p>使用 <code>git rebase --interactive</code>，<code>git add --patch</code> 和其他工具, 以 “挤压” 多次提交到原子更改. 除了 <code>git</code> 的手册页之外, 还有许多在线资源可以帮助您了解这些工具的工作原理.</p>
+<h2 id="在-git-提交中使用您的真实姓名或码名"><a href="#在-git-提交中使用您的真实姓名或码名" class="headerlink" title="在 git 提交中使用您的真实姓名或码名"></a>在 <code>git</code> 提交中使用您的真实姓名或码名</h2><p>请配置 <code>git</code> 以使用您要提交的任何提交的真实名字和姓氏作为拉取请求. 例如, 这是不可接受的:</p>
+<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Author: Nickname &lt;user@mail.com&gt;</span><br></pre></td></tr></table></figure>
+<p>相反, 请提供正确大写的名字和姓氏:</p>
+<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Author: First Last &lt;user@mail.com&gt;</span><br></pre></td></tr></table></figure>
+<p>这有助于确保对CLA的可追溯性, 并且还可以很长时间地确保来自 <code>git shortlog</code> 其他工具的有用输出.</p>
+<p>全局的:</p>
+<figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"First Last"</span></span><br><span class="line">git config --global user.email user@mail.com</span><br></pre></td></tr></table></figure>
+<p>或者省略 <code>--global</code> 标记, 这种你情况下只在当前目录所在存储库有效:</p>
+<figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name <span class="string">'Your Name'</span></span><br><span class="line">git config user.email yourName@thunisoft.com</span><br></pre></td></tr></table></figure>
+<h2 id="为所有行为更改提交-JUnit-测试用例"><a href="#为所有行为更改提交-JUnit-测试用例" class="headerlink" title="为所有行为更改提交 JUnit 测试用例"></a>为所有行为更改提交 <code>JUnit</code> 测试用例</h2><p>搜索代码库以查找相关的单元测试并在其中添加其他 <code>@Test</code> 方法.</p>
+<h2 id="在提交之前运行所有测试"><a href="#在提交之前运行所有测试" class="headerlink" title="在提交之前运行所有测试"></a>在提交之前运行所有测试</h2><p>有关说明，请参阅相关项目 <em>README</em> 的签出和构建部分. 确保在提交合并请求之前通过所有测试.</p>
+<h2 id="开发及发布流程"><a href="#开发及发布流程" class="headerlink" title="开发及发布流程"></a>开发及发布流程</h2><ul>
+<li>基于最新开发分支(develop), 拉取对应的 功能分支(feature).</li>
+<li><p>待功能开发结束后, 执行以下操作:</p>
+<ul>
+<li><code>commit</code> 并 <code>push</code> 分支到 <code>GitLab</code> 服务器.</li>
+<li>等待 <code>CI</code> 中的前置任务均成功后, 点击 <code>review</code> 进行测试环境的部署.</li>
+<li>同时创建合并请求, 标记状态为 <code>WIP</code>. ps: 这时被指定人会收到通知, 将开始 <code>code-review</code>.</li>
+<li>在评论区 @对应测试人员, 等待测试.</li>
+<li>测试人员收到消息后, 应在对应环境中获取服务访问地址, 并进行测试, 若测试通过, <strong>不用回复测试完成</strong>, 直接取消合并请求中的 <code>WIP</code> 标记即可.</li>
+<li>被指定为合并人的开发人员, 接受合并请求</li>
+<li>一次功能开发流程完成.</li>
+</ul>
+<blockquote>
+<p><code>线上问题修复</code> 流程类似, 基础分支 <strong>不是</strong> develop, 换成对应的发布 <strong>tag</strong> 即可.</p>
+</blockquote>
+</li>
+<li><p>待所有功能分支均开发完成、测试完成、合并到 develop 后, 拉取 <code>预发布</code> 分支. e.g. release/1.0-rc1、release/1.0-rc2, 分别对应每一次 release 构建.</p>
+<ul>
+<li>敏捷开发模式下, 也可能是到达发布的时间点了, 就必须发布了, 没有开发完、测试完、合并到 develop 的分支, 等待下一个版本发布. ps: 一般不会超过两周.</li>
+<li>拉取 release 分支后, develop 中的版本需要更新为下一版本. e.g. 1.1、2.0.</li>
+<li>release 分支禁止提交, 如有 bug 修复, 需要新建对应 预发布版本问题修复分支(bugfix), 然后遵从如下流程:  </li>
+</ul>
+<blockquote>
+<p>修改 -&gt; 提交 -&gt; 提测 -&gt; 测试通过 -&gt; 合并回 release 分支</p>
+</blockquote>
+<blockquote>
+<p>ps: rc1 发现的 bug, 合并到 rc2, rc2 发现的 bug, 合并至 rc3, 以此类推, 直到测试通过</p>
+</blockquote>
+</li>
+<li><p>基于预发布的分支, 生成一个对应版本的 <code>tag</code>. (e.g. 1.0) </p>
+</li>
+<li>将 release 分支合并到主分支: <code>master</code>, 同时删除 <code>release</code> 分支.</li>
+<li>将 <code>develop</code> 快进至 <code>master</code>. ps: 其实就是 <code>rebase</code>.</li>
+<li>至此, 一个版本周期结束</li>
+<li>如无特殊情况, 一个版本周期最多为两周, 这版没发出去的, 不用急, 两周后下趟版本列车就来了.</li>
+</ul>
+<h2 id="合并请求流程"><a href="#合并请求流程" class="headerlink" title="合并请求流程"></a>合并请求流程</h2><ol>
+<li>开发人员提起合并请求  在代码基本完成，测试人员介入之前就要提起合并请求，提起合并请求的时候标记 WIP (工作进行中)</li>
+<li>主程审查代码，如果有疑问，主程开启问题讨论</li>
+<li>开发人员修改测试问题和主程开启的讨论问题，commit 并 push 代码</li>
+<li>开发人员提测试的时候，开启一个 <code>测试讨论</code> ，并@对应的测试人员</li>
+<li>测试人员测试通过后，评论测试结果并关闭 <code>测试讨论</code>，可同时取消 WIP 状态</li>
+</ol>
+<p>上述流程中 <strong>不得</strong> 随意 <code>关闭</code> 当前合并请求后, <code>开启</code> 新的合并请求.</p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/Git/" rel="tag"><i class="fas fa-tags"></i>Git</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/2019/05/28/hello-world/" rel="next" title="Hello World"><i class="fas fa-angle-left"></i><span class="nav-title">Hello World</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/2019/06/01/Google Java编程风格指南/" rel="prev" title="Google Java编程风格指南"><span class="nav-title">Google Java编程风格指南</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.png);">
+  
+  <div class="search">
+    <div class="form-group">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control">
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/avatar2.png" alt="JasperTown">
+  
+  <h1 class="author-name">JasperTown</h1>
+  <h2 class="author-description"></h2>
+  <div class="site-count">
+    
+    
+    
+    
+    <div class="archives-count count-block">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">8</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">5</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">5</a></div>
+    </div>
+    
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item" id="toc-div">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      <div class="post-toc-content"><ol class="list-group toc"><li class="toc-item toc-level-1"><a class="list-group-item toc-link" href="#Git-Flow-工作模式"><span class="toc-text">Git Flow 工作模式</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#了解基础知识"><span class="toc-text">了解基础知识</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#设置本地开发环境"><span class="toc-text">设置本地开发环境</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#保持本地代码同步"><span class="toc-text">保持本地代码同步</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#保持线性提交历史记录"><span class="toc-text">保持线性提交历史记录</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#遵循分支命名规范"><span class="toc-text">遵循分支命名规范</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#遵循代码风格"><span class="toc-text">遵循代码风格</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#使用-since-标签"><span class="toc-text">使用 @since 标签</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#使用-author-标签"><span class="toc-text">使用 @author 标签</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#挤压提交-Squash-commits"><span class="toc-text">挤压提交(Squash commits)</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#在-git-提交中使用您的真实姓名或码名"><span class="toc-text">在 git 提交中使用您的真实姓名或码名</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#为所有行为更改提交-JUnit-测试用例"><span class="toc-text">为所有行为更改提交 JUnit 测试用例</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#在提交之前运行所有测试"><span class="toc-text">在提交之前运行所有测试</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#开发及发布流程"><span class="toc-text">开发及发布流程</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#合并请求流程"><span class="toc-text">合并请求流程</span></a></li></ol></li></ol></div>
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接<p></p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:695461532@qq.com" target="_blank">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/" target="_blank">GitHub</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/" target="_blank">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-link"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://github.com/" target="_blank">GitHub</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://developer.mozilla.org/" target="_blank">MDN</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://mozilla.github.io/nunjucks/" target="_blank">Nunjucks</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top"><i class="fas fa-angle-double-up" aria-label="回到顶部"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author">JasperTown</span><span class="year"><i class="far fa-copyright"></i>2019</span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="far fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/AlynxZhou/hexo-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    
+    
+    <meta name="keywords" content="Life, ARIA, Hexo">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="JasperTown的博客" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/clipboard.min.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "search.xml";
+      if (searchPath.length === 0) {
+        searchPath = "search.xml";
+      }
+      var path = "/" + searchPath;
+      searchFunc(path, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var cb = null;
+      var els = $(".post figure.highlight");
+      if (els.length) {
+        // Enabled Hexo highlight line number.
+        $(els).each(function (i, e) {
+          $(e).before("<button class=\"copy button\">复制</button>");
+        });
+        cb = new ClipboardJS("button.copy", {
+          "target": function (trigger) {
+              // Get target element by DOM API.
+              // nextElementSibling is figure,highlight.
+              // And following is the sequence of Hexo's internal
+              // highlight layout with line number.
+              return trigger.nextElementSibling.firstChild.firstChild.firstChild.lastChild.firstChild.firstChild;
+          }
+        });
+      } else {
+        // Disabled Hexo highlight line number.
+        els = $(".post pre code");
+        $(els).each(function (i, e) {
+          // Add button before pre, not code.
+          $(e).parent().before("<button class=\"copy button\">复制</button>");
+        });
+        cb = new ClipboardJS("button.copy", {
+          "target": function (trigger) {
+              // Get target element by DOM API.
+              // nextElementSibling is figure,highlight.
+              // And following is the sequence of Hexo's internal
+              // highlight layout without line number.
+              return trigger.nextElementSibling.firstChild;
+          }
+        });
+      }
+      cb.on("success", function (e) {
+        e.clearSelection();
+        var trigger = e.trigger;
+        // Change button text as a user tip.
+        trigger.innerHTML = "已复制";
+        $(trigger).addClass("copied");
+        // Change button text back;
+        setTimeout(function () {
+          trigger.innerHTML = "复制";
+          $(trigger).removeClass("copied");
+        }, 1500);
+      });
+    });
+    </script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>IO | JasperTown的博客</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">JasperTown的博客</a></h1>
+        <h2 class="subtitle"></h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo2.png" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
+        
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
+        
+        <li role="menuitem"><a href="/about/"><i class="fas fa-user-edit"></i><span class="menu-text">关于</span></a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  
+  <article class="article post card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/io/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+       <meta itemprop="name" content="JasperTown">
+       <meta itemprop="description" content>
+       <meta itemprop="image" content="/images/avatar2.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+       <meta itemprop="name" content="JasperTown的博客">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">IO</h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-06-01T02:42:22+08:00">2019-06-01 02:42:22</time></span>
+        </span>
+        
+        
+        
+        <span class="post-meta-divider divider">|</span>
+        
+        <span class="post-categories">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+        </span>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <h1 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h1><h3 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h3><ul>
+<li>流就是字节序列的抽象概念，能被连续读取数据的数据源和能被连续写入数据的接收端就是流，流机制是Java及C++中的一个重要机制，通过流我们可以自由地控制文件、内存、IO设备等数据的流向。而IO流就是用于处理设备上的数据，如：硬盘、内存、键盘录入等。IO流根据处理类型的不同可分为字节流和字符流，根据流向的不同可分为输入流和输出流。<h4 id="二-、字节流和字符流的区别"><a href="#二-、字节流和字符流的区别" class="headerlink" title="二 、字节流和字符流的区别"></a>二 、字节流和字符流的区别</h4></li>
+<li>字符流，因为文件编码的不同，就有了对字符进行高效操作的字符流对象，它的原理就是基于字节流读取字节时去查了指定的码表。它和字节流的区别有两点：1.在读取数据的时候，字节流读到一个字节就返回一个字节，字符流使用了字节流读到一个或多个字节（一个中文对应的字节数是两个，在UTF-8码表中是3个字节）时，先去查指定的编码表，再将查到的字符<br>返回；</li>
+<li>字节流可以处理所有类型的数据，如jpg、avi、mp3、wav等等，而字符流只能处理字符数据。所以可以根据处理的文件不同考虑使用字节流还是字符流，如果是纯文本数据可以优先考虑字符流，否则使用字节流。<h3 id="三、IO继承体系"><a href="#三、IO继承体系" class="headerlink" title="三、IO继承体系"></a>三、IO继承体系</h3><img src="./IO继承体系.png" alt="IO继承体系"><h4 id="IO流主要可以分为节点流和处理流两大类"><a href="#IO流主要可以分为节点流和处理流两大类" class="headerlink" title="IO流主要可以分为节点流和处理流两大类"></a>IO流主要可以分为节点流和处理流两大类</h4><h5 id="1-节点流类型"><a href="#1-节点流类型" class="headerlink" title="1.节点流类型"></a>1.节点流类型</h5>该类型可以从或者向一个特定的地点或者节点读写数据。主要类型如下：<br><img src="./节点流.png" alt="IO节点流"><h4 id="2-处理流类型"><a href="#2-处理流类型" class="headerlink" title="2.处理流类型"></a>2.处理流类型</h4>该类型是对一个已存在的流的连接和封装，通过所封装的流的功能调用实现数据读写，处理流的构造方法总是要带一个其他流对象作为参数，一个流对象进过其他流的多次包装，叫做流的链接。主要可以分为以下几种：</li>
+</ul>
+<p>(1) 缓冲流（BufferedInPutStream/BufferedOutPutStream和BufferedWriter/BufferedReader）他可以提高对流的操作效率。<br> 写入缓冲区对象：<br> BufferedWriter bufw=new BufferedWriter(new FileWriter(“buf.txt”));<br>读取缓冲区对象：<br> BufferedReader bufr=new BufferedReader(new FileReader(“buf.txt”));<br><code>注意：</code>该类型的流有一个特有的方法：readLine()；一次读一行，到行标记时，将行标记之前的字符数据作为字符串返回，当读到末尾时，返回null，其原理还是与缓冲区关联的流对象的read方法，只不过每一次读取到一个字符，先不进行具体操作，先进行临时储存，当读取到回车标记时，将临时容器中储存的数据一次性返回。</p>
+<p>(2) 转换流（InputStreamReader/OutputStreamWriter）</p>
+<ul>
+<li><p>该类型时字节流和字符流之间的桥梁，该流对象中可以对读取到的字节数据进行指定编码的编码转换。</p>
+<h5 id="构造函数主要有："><a href="#构造函数主要有：" class="headerlink" title="构造函数主要有："></a>构造函数主要有：</h5><figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">InputStreamReader(InputStream); <span class="comment">//通过构造函数初始化，使用的是本系统默认的编码表GBK。  </span></span><br><span class="line">InputStreamWriter(InputStream,String charSet);<span class="comment">//通过该构造函数初始化，可以指定编码表。  </span></span><br><span class="line">OutputStreamWriter(OutputStream); <span class="comment">//通过该构造函数初始化，使用的是本系统默认的编码表GBK。  </span></span><br><span class="line">OutputStreamwriter(OutputStream,String charSet); <span class="comment">//通过该构造函数初始化，可以指定编码表。</span></span><br></pre></td></tr></table></figure>
+<p><code>注意：</code>在使用FileReader操作文本数据时，该对象使用的时默认的编码表，即</p>
+<p>FileReader fr=new FileReader(“a.txt”);<br>与   InputStreamReader isr=new InputStreamReader(new FileInputStream(“a.txt”));   的意义相同。如果要使用指定表编码表时，必须使用转换流，即如果a.txt中的文件中的字符数据是通过utf-8的形式编码，那么在读取时，就必须指定编码表，那么转换流时必须的。即：</p>
+<figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStreamReader isr=<span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"a.txt"</span>),utf-<span class="number">8</span>);</span><br></pre></td></tr></table></figure>
+<p>(3) 数据流（<code>DataInputStream/DataOutputStream</code>）</p>
+<ul>
+<li>该数据流可以方便地对一些基本类型数据进行直接的存储和读取，不需要再进一步进行转换，通常只要操作基本数据类型的数据，就需要通过DataStream进行包装。<br>构造方法：        <figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DataInputStreamReader（InputStream）；  </span><br><span class="line">DataInputStreamWriter（OutputStream）；</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="方法举例："><a href="#方法举例：" class="headerlink" title="方法举例："></a>方法举例：</h5><figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一次读取四个字节，并将其转成int值           </span></span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">readInt</span><span class="params">()</span>；</span></span><br><span class="line"><span class="function"><span class="comment">//一次写入四个字节，注意和write(int)不同，write(int)只将该整数的最低一个8位写入，</span></span></span><br><span class="line"><span class="function">剩余三个8为丢失  </span></span><br><span class="line"><span class="function">  <span class="title">writeInt</span><span class="params">(<span class="keyword">int</span>)</span>；</span></span><br><span class="line"><span class="function">  hort <span class="title">readShort</span><span class="params">()</span></span>;  </span><br><span class="line">  writeShort(<span class="keyword">short</span>);</span><br><span class="line"><span class="comment">//按照utf-8修改版读取字符，注意，它只能读writeUTF()写入的字符数据。    </span></span><br><span class="line"> <span class="function">String <span class="title">readUTF</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//按照utf-8修改版将字符数据进行存储，只能通过readUTF读取。</span></span><br><span class="line"> writeUTF(String);</span><br></pre></td></tr></table></figure>
+<p><code>注意：</code>在使用数据流读/存数据的时候，需要有一定的顺序，即某个类型的数据先写入就必须先读出，服从先进先出的原则。</p>
+</li>
+</ul>
+<p>(4) 打印流（PrintStream/PrintWriter）</p>
+<ul>
+<li><code>PrintStream</code>是一个字节打印流，System.out对应的类型就是PrintStream，它的构造函数可以接受三种数据类型的值：字符串路径、File对象 、OutputStream；</li>
+<li><p><code>PrintStream</code>是一个字符打印流，它的构造函数可以接受四种类型的值：字符串路径、File对象、<br>OutputStream；</p>
+<p>(5) 对象流（ObjectInputStream/ObjectOutputStream）</p>
+<p>该类型的流可以把类作为一个整体进行存取，主要方法有：</p>
+<figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//该方法抛出异常：ClassNotFountException</span></span><br><span class="line"> <span class="function">Object <span class="title">readObject</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//被写入的对象必须实现一个接口：Serializable，否则就会抛出：NotSerializableException</span></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(Object)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-IO流简单示例-FileInputStream"><a href="#4-IO流简单示例-FileInputStream" class="headerlink" title="4.IO流简单示例(FileInputStream)"></a>4.IO流简单示例(<code>FileInputStream</code>)</h3><figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FileInputStreamTest</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        FileInputStream fis = <span class="keyword">null</span>;</span><br><span class="line">        FileOutputStream fos = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            fis =<span class="keyword">new</span> FileInputStream(<span class="string">"D:/study/iotest/src.txt"</span>);</span><br><span class="line">            fos =<span class="keyword">new</span> FileOutputStream(<span class="string">"D:/study/iotest/dest.txt"</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">int</span> x;</span><br><span class="line">            <span class="keyword">while</span> ((x = fis.read()) != -<span class="number">1</span>) &#123;</span><br><span class="line">                fos.write(x);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (fis != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    fis.close();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (fos != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    fos.close();</span><br><span class="line">              &#125;</span><br><span class="line">	 &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="commons-io"><a href="#commons-io" class="headerlink" title="commons-io"></a>commons-io</h1><p>commons-io 是一款处理 io 流的工具，封装了很多处理 io 流和文件的方法，可以大大简化我们处理 io 流和操作文件的代码。从 common-io 的官方使用文档可以看出，它主要分为工具类、尾端类、行迭代器、文件过滤器、文件比较器和扩展流。</p>
+<h3 id="一、工具类"><a href="#一、工具类" class="headerlink" title="一、工具类"></a>一、工具类</h3><h4 id="工具类包括-FileUtils、IOUtils、FilenameUtils和-FileSystemUtils，前三者的方法并没有多大的区别，只是操作的对象不同，故名思议：FileUtils-主要操作-File-类，IOUtils-主要操作-IO-流，FilenameUtils-则是操作文件名，FileSystemUtils-包含了一些-JDK-没有提供的用于访问文件系统的实用方法。当前，只有一个用于读取硬盘空余空间的方法可用。"><a href="#工具类包括-FileUtils、IOUtils、FilenameUtils和-FileSystemUtils，前三者的方法并没有多大的区别，只是操作的对象不同，故名思议：FileUtils-主要操作-File-类，IOUtils-主要操作-IO-流，FilenameUtils-则是操作文件名，FileSystemUtils-包含了一些-JDK-没有提供的用于访问文件系统的实用方法。当前，只有一个用于读取硬盘空余空间的方法可用。" class="headerlink" title="工具类包括 FileUtils、IOUtils、FilenameUtils和 FileSystemUtils，前三者的方法并没有多大的区别，只是操作的对象不同，故名思议：FileUtils 主要操作 File 类，IOUtils 主要操作 IO 流，FilenameUtils 则是操作文件名，FileSystemUtils 包含了一些 JDK 没有提供的用于访问文件系统的实用方法。当前，只有一个用于读取硬盘空余空间的方法可用。"></a>工具类包括 <code>FileUtils、IOUtils、FilenameUtils</code>和 <code>FileSystemUtils</code>，前三者的方法并没有多大的区别，只是操作的对象不同，故名思议：FileUtils 主要操作 File 类，IOUtils 主要操作 IO 流，FilenameUtils 则是操作文件名，FileSystemUtils 包含了一些 JDK 没有提供的用于访问文件系统的实用方法。当前，只有一个用于读取硬盘空余空间的方法可用。</h4><h3 id="二、尾端类"><a href="#二、尾端类" class="headerlink" title="二、尾端类"></a>二、尾端类</h3><h4 id="不同的计算机体系结构使用不同约定的字节排序。在所谓的“低位优先”体系结构中（如-Intel），低位字节处于内存中最低位置，而其后的字节，则处于更高的位置。在“高位优先”的体系结构中（如Motorola），这种情况恰恰相反。"><a href="#不同的计算机体系结构使用不同约定的字节排序。在所谓的“低位优先”体系结构中（如-Intel），低位字节处于内存中最低位置，而其后的字节，则处于更高的位置。在“高位优先”的体系结构中（如Motorola），这种情况恰恰相反。" class="headerlink" title="不同的计算机体系结构使用不同约定的字节排序。在所谓的“低位优先”体系结构中（如 Intel），低位字节处于内存中最低位置，而其后的字节，则处于更高的位置。在“高位优先”的体系结构中（如Motorola），这种情况恰恰相反。"></a>不同的计算机体系结构使用不同约定的字节排序。在所谓的“低位优先”体系结构中（如 <code>Intel</code>），低位字节处于内存中最低位置，而其后的字节，则处于更高的位置。在“高位优先”的体系结构中（如<code>Motorola</code>），这种情况恰恰相反。</h4><ul>
+<li>这个类库上有两个相关类：<br><code>EndianUtils</code>包含用于交换 java 原对象和流之间的字节序列。<br><code>SwappedDataInputStream</code>类是 DataInput 接口的一个实例。使用它，可以读取非本地的字节序列。<h3 id="三、行迭代器"><a href="#三、行迭代器" class="headerlink" title="三、行迭代器"></a>三、行迭代器</h3><h4 id="org-apache-commons-io-LineIterator类提供了一个灵活的方式与基于行的文件交互。可以直接创建一个实例，或者使用-FileUtils-或-IOUtils-的工厂方法来创建，-实例如下："><a href="#org-apache-commons-io-LineIterator类提供了一个灵活的方式与基于行的文件交互。可以直接创建一个实例，或者使用-FileUtils-或-IOUtils-的工厂方法来创建，-实例如下：" class="headerlink" title="org.apache.commons.io.LineIterator类提供了一个灵活的方式与基于行的文件交互。可以直接创建一个实例，或者使用 FileUtils 或 IOUtils 的工厂方法来创建， 实例如下："></a><code>org.apache.commons.io.LineIterator</code>类提供了一个灵活的方式与基于行的文件交互。可以直接创建一个实例，或者使用 FileUtils 或 IOUtils 的工厂方法来创建， 实例如下：</h4><figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testIterator</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">    File file = <span class="keyword">new</span> File(<span class="string">"a.txt"</span>);</span><br><span class="line">    LineIterator li = FileUtils.lineIterator(file);</span><br><span class="line">    <span class="keyword">while</span>(li.hasNext())&#123;</span><br><span class="line">    System.out.println(li.nextLine());</span><br><span class="line">	&#125;</span><br><span class="line">	LineIterator.closeQuietly(li);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="四、文件过滤器"><a href="#四、文件过滤器" class="headerlink" title="四、文件过滤器"></a>四、文件过滤器</h3><h4 id="org-apache-commons-io-filefilter-包定义了一个合并了-java-io-FileFilter-以及-java-io-FilenameFilter-的接口-IOFileFilter-。除此之外，这个包还提供了一系列直接可用的-IOFileFilter-的实现类，可以通过他们合并其它的文件过滤器。比如，这些文件过滤器可以在列出文件时使用或者在使用文件对话框时使用。"><a href="#org-apache-commons-io-filefilter-包定义了一个合并了-java-io-FileFilter-以及-java-io-FilenameFilter-的接口-IOFileFilter-。除此之外，这个包还提供了一系列直接可用的-IOFileFilter-的实现类，可以通过他们合并其它的文件过滤器。比如，这些文件过滤器可以在列出文件时使用或者在使用文件对话框时使用。" class="headerlink" title="org.apache.commons.io.filefilter 包定义了一个合并了 java.io.FileFilter 以及 java.io.FilenameFilter 的接口 (IOFileFilter)。除此之外，这个包还提供了一系列直接可用的 IOFileFilter 的实现类，可以通过他们合并其它的文件过滤器。比如，这些文件过滤器可以在列出文件时使用或者在使用文件对话框时使用。"></a><code>org.apache.commons.io.filefilter</code> 包定义了一个合并了 <code>java.io.FileFilter</code> 以及 <code>java.io.FilenameFilter</code> 的接口 (<code>IOFileFilte</code>r)。除此之外，这个包还提供了一系列直接可用的 <code>IOFileFilter</code> 的实现类，可以通过他们合并其它的文件过滤器。比如，这些文件过滤器可以在列出文件时使用或者在使用文件对话框时使用。</h4><figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 空内容文件过滤器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testEmptyFileFilter</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">	File dir = <span class="keyword">new</span> File(<span class="string">"a.txt"</span>);</span><br><span class="line">	String[] files = dir.list(EmptyFileFilter.NOT_EMPTY);</span><br><span class="line">	<span class="keyword">for</span> (String file : files) &#123;</span><br><span class="line">		System.out.println(file);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 文件名称后缀过滤器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">**<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSuffixFileFilter</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">	File dir = <span class="keyword">new</span> File(basePath);</span><br><span class="line">	String[] files = dir.list(<span class="keyword">new</span> SuffixFileFilter(<span class="string">"a.txt"</span>));</span><br><span class="line">	<span class="keyword">for</span> (String file : files) &#123;</span><br><span class="line">	System.out.println(file);</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="五、文件比较器"><a href="#五、文件比较器" class="headerlink" title="五、文件比较器"></a>五、文件比较器</h3><h4 id="org-apache-commons-io-comparator包为-java-io-File-提供了一些-java-util-Comparator-接口的实现。例如，可以使用这些比较器对文件集合或数组进行排序。-实例如下："><a href="#org-apache-commons-io-comparator包为-java-io-File-提供了一些-java-util-Comparator-接口的实现。例如，可以使用这些比较器对文件集合或数组进行排序。-实例如下：" class="headerlink" title="org.apache.commons.io.comparator包为 java.io.File 提供了一些 java.util.Comparator 接口的实现。例如，可以使用这些比较器对文件集合或数组进行排序。 实例如下："></a><code>org.apache.commons.io.comparator</code>包为 java.io.File 提供了一些 java.util.Comparator 接口的实现。例如，可以使用这些比较器对文件集合或数组进行排序。 实例如下：</h4><figure class="hljs highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 文件名称比较器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testNameFileComparator</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		File f1 = <span class="keyword">new</span> File(basePath + <span class="string">"a.txt"</span>);</span><br><span class="line">		File f2 = <span class="keyword">new</span> File(basePath + <span class="string">"c.txt"</span>);</span><br><span class="line">		<span class="keyword">int</span> result = NameFileComparator.NAME_COMPARATOR.compare(f1, f2);</span><br><span class="line">		System.out.println(result);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 文件路径比较器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPathFileComparator</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		File f1 = <span class="keyword">new</span> File(basePath + <span class="string">"a.txt"</span>);</span><br><span class="line">		File f2 = <span class="keyword">new</span> File(basePath + <span class="string">"c.txt"</span>);</span><br><span class="line">		<span class="keyword">int</span> result = PathFileComparator.PATH_COMPARATOR.compare(f1, f2);</span><br><span class="line">		System.out.println(result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 组合比较器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCompositeFileComparator</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		File dir = <span class="keyword">new</span> File(basePath);</span><br><span class="line">		File [] files = dir.listFiles();</span><br><span class="line">		<span class="keyword">for</span> (File file : files) &#123;</span><br><span class="line">			System.out.println(file.getName());</span><br><span class="line">		&#125;</span><br><span class="line">		CompositeFileComparator cfc = <span class="keyword">new</span> CompositeFileComparator(</span><br><span class="line">		DirectoryFileComparator.DIRECTORY_COMPARATOR,</span><br><span class="line">		NameFileComparator.NAME_COMPARATOR);</span><br><span class="line">		cfc.sort(files);</span><br><span class="line">		System.out.println(<span class="string">"**_**after sort*****"</span>);</span><br><span class="line">		<span class="keyword">for</span> (File file : files) &#123;</span><br><span class="line">			System.out.println(file.getName());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="六、扩展流"><a href="#六、扩展流" class="headerlink" title="六、扩展流"></a>六、扩展流</h3><h4 id="org-apache-commons-io-input-和-org-apache-commons-io-output包中包含的针对数据流的各种各样的的实现。包括："><a href="#org-apache-commons-io-input-和-org-apache-commons-io-output包中包含的针对数据流的各种各样的的实现。包括：" class="headerlink" title="org.apache.commons.io.input 和 org.apache.commons.io.output包中包含的针对数据流的各种各样的的实现。包括："></a><code>org.apache.commons.io.input</code> 和 <code>org.apache.commons.io.output</code>包中包含的针对数据流的各种各样的的实现。包括：</h4><ul>
+<li>空输出流－默默吸收发送给它的所有数据</li>
+<li>T 型输出流－全用两个输出流替换一个进行发送</li>
+<li>字节数组输出流－这是一个更快版本的 JDK 类</li>
+<li>计数流－计算通过的字节数</li>
+<li>代理流－使用正确的方法委拖</li>
+<li>可锁写入－使用上锁文件提供同步写入</li>
+</ul>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/IO流/" rel="tag"><i class="fas fa-tags"></i>IO流</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/2019/06/01/Spring Task 和 Schedule/" rel="next" title="Spring 4.x Task 和 Schedule"><i class="fas fa-angle-left"></i><span class="nav-title">Spring 4.x Task 和 Schedule</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+    </div>
+  </nav>
+  
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.png);">
+  
+  <div class="search">
+    <div class="form-group">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control">
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/avatar2.png" alt="JasperTown">
+  
+  <h1 class="author-name">JasperTown</h1>
+  <h2 class="author-description"></h2>
+  <div class="site-count">
+    
+    
+    
+    
+    <div class="archives-count count-block">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">8</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">5</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">5</a></div>
+    </div>
+    
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item" id="toc-div">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      <div class="post-toc-content"><ol class="list-group toc"><li class="toc-item toc-level-1"><a class="list-group-item toc-link" href="#IO"><span class="toc-text">IO</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#一、概念"><span class="toc-text">一、概念</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#二-、字节流和字符流的区别"><span class="toc-text">二 、字节流和字符流的区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#三、IO继承体系"><span class="toc-text">三、IO继承体系</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#IO流主要可以分为节点流和处理流两大类"><span class="toc-text">IO流主要可以分为节点流和处理流两大类</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-5"><a class="list-group-item toc-link" href="#1-节点流类型"><span class="toc-text">1.节点流类型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#2-处理流类型"><span class="toc-text">2.处理流类型</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-5"><a class="list-group-item toc-link" href="#构造函数主要有："><span class="toc-text">构造函数主要有：</span></a></li><li class="toc-item toc-level-5"><a class="list-group-item toc-link" href="#方法举例："><span class="toc-text">方法举例：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#4-IO流简单示例-FileInputStream"><span class="toc-text">4.IO流简单示例(FileInputStream)</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="list-group-item toc-link" href="#commons-io"><span class="toc-text">commons-io</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#一、工具类"><span class="toc-text">一、工具类</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#工具类包括-FileUtils、IOUtils、FilenameUtils和-FileSystemUtils，前三者的方法并没有多大的区别，只是操作的对象不同，故名思议：FileUtils-主要操作-File-类，IOUtils-主要操作-IO-流，FilenameUtils-则是操作文件名，FileSystemUtils-包含了一些-JDK-没有提供的用于访问文件系统的实用方法。当前，只有一个用于读取硬盘空余空间的方法可用。"><span class="toc-text">工具类包括 FileUtils、IOUtils、FilenameUtils和 FileSystemUtils，前三者的方法并没有多大的区别，只是操作的对象不同，故名思议：FileUtils 主要操作 File 类，IOUtils 主要操作 IO 流，FilenameUtils 则是操作文件名，FileSystemUtils 包含了一些 JDK 没有提供的用于访问文件系统的实用方法。当前，只有一个用于读取硬盘空余空间的方法可用。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#二、尾端类"><span class="toc-text">二、尾端类</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#不同的计算机体系结构使用不同约定的字节排序。在所谓的“低位优先”体系结构中（如-Intel），低位字节处于内存中最低位置，而其后的字节，则处于更高的位置。在“高位优先”的体系结构中（如Motorola），这种情况恰恰相反。"><span class="toc-text">不同的计算机体系结构使用不同约定的字节排序。在所谓的“低位优先”体系结构中（如 Intel），低位字节处于内存中最低位置，而其后的字节，则处于更高的位置。在“高位优先”的体系结构中（如Motorola），这种情况恰恰相反。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#三、行迭代器"><span class="toc-text">三、行迭代器</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#org-apache-commons-io-LineIterator类提供了一个灵活的方式与基于行的文件交互。可以直接创建一个实例，或者使用-FileUtils-或-IOUtils-的工厂方法来创建，-实例如下："><span class="toc-text">org.apache.commons.io.LineIterator类提供了一个灵活的方式与基于行的文件交互。可以直接创建一个实例，或者使用 FileUtils 或 IOUtils 的工厂方法来创建， 实例如下：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#四、文件过滤器"><span class="toc-text">四、文件过滤器</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#org-apache-commons-io-filefilter-包定义了一个合并了-java-io-FileFilter-以及-java-io-FilenameFilter-的接口-IOFileFilter-。除此之外，这个包还提供了一系列直接可用的-IOFileFilter-的实现类，可以通过他们合并其它的文件过滤器。比如，这些文件过滤器可以在列出文件时使用或者在使用文件对话框时使用。"><span class="toc-text">org.apache.commons.io.filefilter 包定义了一个合并了 java.io.FileFilter 以及 java.io.FilenameFilter 的接口 (IOFileFilter)。除此之外，这个包还提供了一系列直接可用的 IOFileFilter 的实现类，可以通过他们合并其它的文件过滤器。比如，这些文件过滤器可以在列出文件时使用或者在使用文件对话框时使用。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#五、文件比较器"><span class="toc-text">五、文件比较器</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#org-apache-commons-io-comparator包为-java-io-File-提供了一些-java-util-Comparator-接口的实现。例如，可以使用这些比较器对文件集合或数组进行排序。-实例如下："><span class="toc-text">org.apache.commons.io.comparator包为 java.io.File 提供了一些 java.util.Comparator 接口的实现。例如，可以使用这些比较器对文件集合或数组进行排序。 实例如下：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#六、扩展流"><span class="toc-text">六、扩展流</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#org-apache-commons-io-input-和-org-apache-commons-io-output包中包含的针对数据流的各种各样的的实现。包括："><span class="toc-text">org.apache.commons.io.input 和 org.apache.commons.io.output包中包含的针对数据流的各种各样的的实现。包括：</span></a></li></ol></li></ol></li></div>
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接<p></p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:695461532@qq.com" target="_blank">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/" target="_blank">GitHub</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/" target="_blank">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-link"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://github.com/" target="_blank">GitHub</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://developer.mozilla.org/" target="_blank">MDN</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://mozilla.github.io/nunjucks/" target="_blank">Nunjucks</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top"><i class="fas fa-angle-double-up" aria-label="回到顶部"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author">JasperTown</span><span class="year"><i class="far fa-copyright"></i>2019</span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="far fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/AlynxZhou/hexo-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
